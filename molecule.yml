@@ -4,9 +4,21 @@ ansible:
 
 docker:
   containers:
+    - name: ansible-role-golang-debian-wheezy
+      image: debian
+      image_version: '7'
+    - name: ansible-role-golang-debian-jessie
+      image: debian
+      image_version: '8'
     - name: ansible-role-golang-ubuntu-trusty
       image: ubuntu
       image_version: '14.04'
     - name: ansible-role-golang-ubuntu-xenial
       image: ubuntu
       image_version: '16.04'
+    - name: ansible-role-golang-centos-6
+      image: centos
+      image_version: '6'
+    - name: ansible-role-golang-centos-7
+      image: centos
+      image_version: '7'

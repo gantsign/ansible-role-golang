@@ -5,10 +5,18 @@ galaxy_info:
   license: MIT
   min_ansible_version: 2.0
   platforms:
+  - name: EL
+    versions:
+    - 6
+    - 7
   - name: Ubuntu
     versions:
     - trusty
     - xenial
+  - name: Debian
+    versions:
+    - jessie
+    - wheezy
   galaxy_tags:
     - golang
 dependencies: []
