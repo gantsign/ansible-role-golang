@@ -15,10 +15,24 @@ Requirements
 
     * Debian Family
 
+        * Debian
+
+            * Wheezy (7)
+            * Jessie (8)
+
         * Ubuntu
 
             * Trusty (14.04)
             * Xenial (16.04)
+
+    * RedHat Family
+
+        * CentOS
+
+            * 6
+            * 7
+
+    * Note: other versions are likely to work but have not been tested.
 
 Role Variables
 --------------
