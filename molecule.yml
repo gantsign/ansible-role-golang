@@ -1,15 +1,12 @@
 ---
+ansible:
+  playbook: tests/test.yml
+
 docker:
   containers:
-
-      - name: ansible-role-golang-01
-        image: ubuntu
-        image_version: latest
-        ansible_groups:
-          - group1
-
-      - name: ansible-role-golang-02
-        image: ubuntu
-        image_version: latest
-        ansible_groups:
-          - group1
+    - name: ansible-role-golang-ubuntu-trusty
+      image: ubuntu
+      image_version: '14.04'
+    - name: ansible-role-golang-ubuntu-xenial
+      image: ubuntu
+      image_version: '16.04'

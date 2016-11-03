@@ -1,5 +1,7 @@
 ---
-- hosts: localhost
+- hosts: all
   remote_user: root
+
   roles:
-    - ansible-role-golang
+    - role: ansible-role-golang
+      golang_gopath: '$HOME/workspace-go'

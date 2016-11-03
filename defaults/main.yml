@@ -1,2 +1,15 @@
 ---
-# defaults file for ansible-role-golang
+# Go language SDK version number
+golang_version: '1.7.3'
+
+# Mirror to download the Go language SDK redistributable package from
+golang_mirror: 'https://storage.googleapis.com/golang'
+
+# Base installation directory the Go language SDK distribution
+golang_install_dir: '/opt/go/{{ golang_version }}'
+
+# Directory to store files downloaded for Go language SDK installation
+golang_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
+
+# Location for GOPATH environment variable
+golang_gopath:
