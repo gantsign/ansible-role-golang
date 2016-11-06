@@ -1,6 +1,6 @@
 galaxy_info:
   author: John Freeman
-  description: Role for downloading and installing the Go language SDK.
+  description: Role for installing the Go language SDK.
   company: GantSign Ltd.
   license: MIT
   min_ansible_version: 2.0
