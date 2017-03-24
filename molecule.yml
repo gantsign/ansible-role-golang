@@ -2,6 +2,12 @@
 ansible:
   playbook: tests/test.yml
 
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
 docker:
   containers:
     - name: ansible-role-golang-debian-wheezy
@@ -22,3 +28,6 @@ docker:
     - name: ansible-role-golang-centos-7
       image: centos
       image_version: '7'
+
+verifier:
+  name: testinfra
