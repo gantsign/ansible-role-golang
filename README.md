@@ -64,6 +64,7 @@ The following versions of Go language SDK are supported without any additional
 configuration (for other versions follow the Advanced Configuration
 instructions):
 
+* `1.8.2`
 * `1.8.1`
 * `1.8`
 * `1.7.4`
