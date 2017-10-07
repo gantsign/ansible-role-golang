@@ -65,6 +65,7 @@ configuration (for other versions follow the Advanced Configuration
 instructions):
 
 * `1.9`
+* `1.8.4`
 * `1.8.3`
 * `1.8.2`
 * `1.8.1`
