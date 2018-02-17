@@ -7,9 +7,9 @@ testinfra_hosts = AnsibleRunner('.molecule/ansible_inventory').get_hosts('all')
 
 
 @pytest.mark.parametrize('name,pattern', [
-    ('GOROOT', '^/opt/go/1.9.4$'),
+    ('GOROOT', '^/opt/go/1.10$'),
     ('GOPATH', '^/root/workspace-go$'),
-    ('PATH', '^(.+:)?/opt/go/1.9.4/bin(:.+)?$'),
+    ('PATH', '^(.+:)?/opt/go/1.10/bin(:.+)?$'),
     ('PATH', '^(.+:)?/root/workspace-go/bin(:.+)?$')
 ])
 def test_go_env(Command, name, pattern):
