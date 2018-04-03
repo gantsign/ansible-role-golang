@@ -71,7 +71,7 @@
 - name: export Go language SDK environment variables
   become: yes
   template:
-    src:  golang.sh.j2
+    src: golang.sh.j2
     dest: /etc/profile.d/golang.sh
     owner: root
     group: root
