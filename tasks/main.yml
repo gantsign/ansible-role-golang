@@ -1,9 +1,9 @@
 ---
 - name: load version vars
   with_first_found:
-    - "../vars/versions/{{ golang_version }}.yml"
+    - '../vars/versions/{{ golang_version }}.yml'
     - ../vars/versions/default.yml
-  include_vars: "{{ item }}"
+  include_vars: '{{ item }}'
 
 - name: assert version vars
   assert:
@@ -14,7 +14,7 @@
   file:
     state: directory
     mode: 'u=rwx,go=rx'
-    dest: "{{ golang_download_dir }}"
+    dest: '{{ golang_download_dir }}'
 
 - name: ensure ca-certificates installed (apt)
   become: yes
@@ -25,9 +25,9 @@
 
 - name: download Go language SDK
   get_url:
-    url: "{{ golang_mirror }}/{{ golang_redis_filename }}"
-    dest: "{{ golang_download_dir }}/{{ golang_redis_filename }}"
-    sha256sum: "{{ golang_redis_sha256sum }}"
+    url: '{{ golang_mirror }}/{{ golang_redis_filename }}'
+    dest: '{{ golang_download_dir }}/{{ golang_redis_filename }}'
+    sha256sum: '{{ golang_redis_sha256sum }}'
     force: no
     use_proxy: yes
     validate_certs: yes
@@ -40,7 +40,7 @@
     owner: root
     group: root
     mode: 'u=rwx,go=rx'
-    dest: "{{ golang_install_dir }}"
+    dest: '{{ golang_install_dir }}'
 
 - name: install tar (zypper)
   become: yes
