@@ -51,19 +51,14 @@
 
 - name: install Go language SDK
   become: yes
-  tags:
-    # Suppress: [ANSIBLE0006] tar used in place of unarchive module
-    # The unarchive module didn't support `--strip-components` before
-    # `extra_opts` was added in 2.1 and we're supporting >= 2.0.
-    - skip_ansible_lint
-  command: >
-    /bin/tar --extract --gunzip --strip-components=1
-    --file '{{ golang_download_dir }}/{{ golang_redis_filename }}'
-    --directory '{{ golang_install_dir }}'
-  args:
-    creates: "{{ golang_install_dir }}/bin"
-    # Suppress: [WARNING]: Consider using unarchive module rather than running tar
-    warn: no
+  unarchive:
+    src: '{{ golang_download_dir }}/{{ golang_redis_filename }}'
+    remote_src: yes
+    extra_opts: '--strip-components=1'
+    dest: '{{ golang_install_dir }}'
+    owner: root
+    group: root
+    creates: '{{ golang_install_dir }}/bin'
 
 # Set Go language SDK environment variables
 - name: make sure /etc/profile.d exists
