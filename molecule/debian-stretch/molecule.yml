@@ -9,8 +9,8 @@ lint:
   name: yamllint
 
 platforms:
-  - name: ansible-role-golang-debian-jessie
-    image: debian:8
+  - name: ansible-role-golang-debian-stretch
+    image: debian:9
 
 provisioner:
   name: ansible
@@ -23,7 +23,7 @@ provisioner:
     name: ansible-lint
 
 scenario:
-  name: debian-jessie
+  name: debian-stretch
 
 verifier:
   name: testinfra

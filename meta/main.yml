@@ -16,6 +16,7 @@ galaxy_info:
         - xenial
     - name: Debian
       versions:
+        - stretch
         - jessie
         - wheezy
     - name: Fedora

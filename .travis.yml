@@ -14,7 +14,7 @@ matrix:
         - MOLECULE_SCENARIO=centos-7
     - env:
         - ANSIBLE_VERSION=2.3.2
-        - MOLECULE_SCENARIO=debian-jessie
+        - MOLECULE_SCENARIO=debian-stretch
     - env:
         - ANSIBLE_VERSION=2.3.2
         - MOLECULE_SCENARIO=debian-wheezy
@@ -35,7 +35,7 @@ matrix:
         - MOLECULE_SCENARIO=centos-7
     - env:
         - ANSIBLE_VERSION=2.4.3
-        - MOLECULE_SCENARIO=debian-jessie
+        - MOLECULE_SCENARIO=debian-stretch
     - env:
         - ANSIBLE_VERSION=2.4.3
         - MOLECULE_SCENARIO=debian-wheezy
