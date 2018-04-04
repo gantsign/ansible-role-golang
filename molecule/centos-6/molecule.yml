@@ -1,0 +1,32 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+lint:
+  name: yamllint
+
+platforms:
+  - name: ansible-role-golang-centos-6
+    image: centos:6
+
+provisioner:
+  name: ansible
+  playbooks:
+    create: ../default/create.yml
+    destroy: ../default/destroy.yml
+    prepare: ../default/prepare.yml
+    converge: ../default/playbook.yml
+  lint:
+    name: ansible-lint
+
+scenario:
+  name: centos-6
+
+verifier:
+  name: testinfra
+  directory: ../default/tests/
+  lint:
+    name: flake8
