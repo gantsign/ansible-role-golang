@@ -1,7 +1,0 @@
----
-- hosts: all
-  remote_user: root
-
-  roles:
-    - role: ansible-role-golang
-      golang_gopath: '$HOME/workspace-go'

@@ -1,0 +1,14 @@
+---
+- name: Converge
+  hosts: all
+
+  roles:
+    - role: ansible-role-golang
+      golang_gopath: '$HOME/workspace-go'
+
+  post_tasks:
+    - name: install which
+      package:
+        name: which
+        state: present
+      when: ansible_pkg_mgr in ('yum', 'dnf', 'zypper')
