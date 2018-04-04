@@ -42,6 +42,13 @@
     mode: 'u=rwx,go=rx'
     dest: "{{ golang_install_dir }}"
 
+- name: install tar (zypper)
+  become: yes
+  zypper:
+    name: tar
+    state: present
+  when: ansible_pkg_mgr == 'zypper'
+
 - name: install Go language SDK
   become: yes
   tags:

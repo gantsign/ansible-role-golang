@@ -12,3 +12,11 @@
         name: which
         state: present
       when: ansible_pkg_mgr in ('yum', 'dnf', 'zypper')
+
+    # provides /etc/profile
+    - name: install aaa_base (zypper)
+      become: yes
+      zypper:
+        name: aaa_base
+        state: present
+      when: ansible_pkg_mgr == 'zypper'

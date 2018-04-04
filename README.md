@@ -37,6 +37,12 @@ Requirements
 
             * 27
 
+    * SUSE
+
+        * Leap
+
+            * 42.3
+
     * Note: other versions are likely to work but have not been tested.
 
 Role Variables

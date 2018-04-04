@@ -25,6 +25,9 @@ matrix:
         - ANSIBLE_VERSION=2.3.2
         - MOLECULE_SCENARIO=ubuntu-trusty
     - env:
+        - ANSIBLE_VERSION=2.3.2
+        - MOLECULE_SCENARIO=opensuse-leap
+    - env:
         - ANSIBLE_VERSION=2.4.3
         - MOLECULE_SCENARIO=centos-6
     - env:
@@ -42,6 +45,9 @@ matrix:
     - env:
         - ANSIBLE_VERSION=2.4.3
         - MOLECULE_SCENARIO=ubuntu-trusty
+    - env:
+        - ANSIBLE_VERSION=2.4.3
+        - MOLECULE_SCENARIO=opensuse-leap
 
 # Require the standard build environment
 sudo: required
