@@ -33,6 +33,10 @@ Requirements
             * 6
             * 7
 
+        * Fedora
+
+            * 27
+
     * Note: other versions are likely to work but have not been tested.
 
 Role Variables

@@ -18,6 +18,9 @@ galaxy_info:
       versions:
         - jessie
         - wheezy
+    - name: Fedora
+      versions:
+        - 27
   galaxy_tags:
     - golang
 dependencies: []
