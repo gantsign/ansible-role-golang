@@ -24,4 +24,5 @@ galaxy_info:
         - 27
   galaxy_tags:
     - golang
+    - development
 dependencies: []
