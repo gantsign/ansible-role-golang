@@ -16,13 +16,6 @@
     mode: 'u=rwx,go=rx'
     dest: '{{ golang_download_dir }}'
 
-- name: ensure ca-certificates installed (apt)
-  become: yes
-  apt:
-    name: ca-certificates
-    state: present
-  when: ansible_pkg_mgr == 'apt'
-
 - name: download Go language SDK
   get_url:
     url: '{{ golang_mirror }}/{{ golang_redis_filename }}'
