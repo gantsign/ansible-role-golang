@@ -14,13 +14,13 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     ('PATH', '^(.+:)?/opt/go/1.10.3/bin(:.+)?$'),
     ('PATH', '^(.+:)?/root/workspace-go/bin(:.+)?$')
 ])
-def test_go_env(Command, name, pattern):
-    cmd = Command('. /etc/profile && printf $' + name)
+def test_go_env(host, name, pattern):
+    cmd = host.run('. /etc/profile && printf $' + name)
     assert re.search(pattern, cmd.stdout)
 
 
-def test_go(Command):
-    cmd = Command('. /etc/profile && go version')
+def test_go(host):
+    cmd = host.run('. /etc/profile && go version')
     assert cmd.rc == 0
 
 
@@ -28,6 +28,6 @@ def test_go(Command):
     'godoc',
     'gofmt'
 ])
-def test_go_tools(Command, command):
-    cmd = Command('. /etc/profile && which ' + command)
+def test_go_tools(host, command):
+    cmd = host.run('. /etc/profile && which ' + command)
     assert cmd.rc == 0
