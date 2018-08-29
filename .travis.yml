@@ -8,46 +8,46 @@ matrix:
   include:
     - env:
         - ANSIBLE_VERSION=2.4.6
-        - MOLECULE_SCENARIO=centos-6
+        - MOLECULE_SCENARIO=centos-min
     - env:
         - ANSIBLE_VERSION=2.4.6
-        - MOLECULE_SCENARIO=centos-7
+        - MOLECULE_SCENARIO=centos-max
     - env:
         - ANSIBLE_VERSION=2.4.6
-        - MOLECULE_SCENARIO=debian-stretch
+        - MOLECULE_SCENARIO=debian-max
     - env:
         - ANSIBLE_VERSION=2.4.6
-        - MOLECULE_SCENARIO=debian-wheezy
+        - MOLECULE_SCENARIO=debian-min
     - env:
         - ANSIBLE_VERSION=2.4.6
         - MOLECULE_SCENARIO=default
     - env:
         - ANSIBLE_VERSION=2.4.6
-        - MOLECULE_SCENARIO=ubuntu-trusty
+        - MOLECULE_SCENARIO=ubuntu-min
     - env:
         - ANSIBLE_VERSION=2.4.6
-        - MOLECULE_SCENARIO=opensuse-leap
+        - MOLECULE_SCENARIO=opensuse
     - env:
         - ANSIBLE_VERSION=2.6.3
-        - MOLECULE_SCENARIO=centos-6
+        - MOLECULE_SCENARIO=centos-min
     - env:
         - ANSIBLE_VERSION=2.6.3
-        - MOLECULE_SCENARIO=centos-7
+        - MOLECULE_SCENARIO=centos-max
     - env:
         - ANSIBLE_VERSION=2.6.3
-        - MOLECULE_SCENARIO=debian-stretch
+        - MOLECULE_SCENARIO=debian-max
     - env:
         - ANSIBLE_VERSION=2.6.3
-        - MOLECULE_SCENARIO=debian-wheezy
+        - MOLECULE_SCENARIO=debian-min
     - env:
         - ANSIBLE_VERSION=2.6.3
         - MOLECULE_SCENARIO=default
     - env:
         - ANSIBLE_VERSION=2.6.3
-        - MOLECULE_SCENARIO=ubuntu-trusty
+        - MOLECULE_SCENARIO=ubuntu-min
     - env:
         - ANSIBLE_VERSION=2.6.3
-        - MOLECULE_SCENARIO=opensuse-leap
+        - MOLECULE_SCENARIO=opensuse
 
 # Require the standard build environment
 sudo: required

@@ -9,8 +9,8 @@ lint:
   name: yamllint
 
 platforms:
-  - name: ansible-role-golang-fedora-27
-    image: fedora:27
+  - name: ansible-role-golang-ubuntu-min
+    image: ubuntu:14.04
 
 provisioner:
   name: ansible
@@ -20,7 +20,7 @@ provisioner:
     name: ansible-lint
 
 scenario:
-  name: fedora-27
+  name: ubuntu-min
 
 verifier:
   name: testinfra

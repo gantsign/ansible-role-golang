@@ -9,7 +9,7 @@ lint:
   name: yamllint
 
 platforms:
-  - name: ansible-role-golang-ubuntu-xenial
+  - name: ansible-role-golang-ubuntu-max
     image: ubuntu:16.04
 
 provisioner:
