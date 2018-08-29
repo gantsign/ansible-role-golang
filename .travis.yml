@@ -26,6 +26,9 @@ matrix:
         - MOLECULE_SCENARIO=ubuntu-min
     - env:
         - ANSIBLE_VERSION=2.4.6
+        - MOLECULE_SCENARIO=fedora
+    - env:
+        - ANSIBLE_VERSION=2.4.6
         - MOLECULE_SCENARIO=opensuse
     - env:
         - ANSIBLE_VERSION=2.6.3
@@ -45,6 +48,9 @@ matrix:
     - env:
         - ANSIBLE_VERSION=2.6.3
         - MOLECULE_SCENARIO=ubuntu-min
+    - env:
+        - ANSIBLE_VERSION=2.6.3
+        - MOLECULE_SCENARIO=fedora
     - env:
         - ANSIBLE_VERSION=2.6.3
         - MOLECULE_SCENARIO=opensuse
