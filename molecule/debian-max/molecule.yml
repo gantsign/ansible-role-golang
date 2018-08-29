@@ -9,7 +9,7 @@ lint:
   name: yamllint
 
 platforms:
-  - name: ansible-role-golang-debian-stretch
+  - name: ansible-role-golang-debian-max
     image: debian:9
 
 provisioner:
@@ -20,7 +20,7 @@ provisioner:
     name: ansible-lint
 
 scenario:
-  name: debian-stretch
+  name: debian-max
 
 verifier:
   name: testinfra

@@ -9,8 +9,8 @@ lint:
   name: yamllint
 
 platforms:
-  - name: ansible-role-golang-centos-7
-    image: centos:7
+  - name: ansible-role-golang-debian-min
+    image: debian:7
 
 provisioner:
   name: ansible
@@ -20,7 +20,7 @@ provisioner:
     name: ansible-lint
 
 scenario:
-  name: centos-7
+  name: debian-min
 
 verifier:
   name: testinfra

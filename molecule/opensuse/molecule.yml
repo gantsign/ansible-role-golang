@@ -9,8 +9,8 @@ lint:
   name: yamllint
 
 platforms:
-  - name: ansible-role-golang-debian-wheezy
-    image: debian:7
+  - name: ansible-role-golang-opensuse
+    image: opensuse:42.2
 
 provisioner:
   name: ansible
@@ -20,7 +20,7 @@ provisioner:
     name: ansible-lint
 
 scenario:
-  name: debian-wheezy
+  name: opensuse
 
 verifier:
   name: testinfra

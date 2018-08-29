@@ -9,8 +9,8 @@ lint:
   name: yamllint
 
 platforms:
-  - name: ansible-role-golang-ubuntu-trusty
-    image: ubuntu:14.04
+  - name: ansible-role-golang-centos-max
+    image: centos:7
 
 provisioner:
   name: ansible
@@ -20,7 +20,7 @@ provisioner:
     name: ansible-lint
 
 scenario:
-  name: ubuntu-trusty
+  name: centos-max
 
 verifier:
   name: testinfra

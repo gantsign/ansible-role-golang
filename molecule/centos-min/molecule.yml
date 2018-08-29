@@ -9,8 +9,8 @@ lint:
   name: yamllint
 
 platforms:
-  - name: ansible-role-golang-opensuse-leap
-    image: opensuse:42.2
+  - name: ansible-role-golang-centos-min
+    image: centos:6
 
 provisioner:
   name: ansible
@@ -20,7 +20,7 @@ provisioner:
     name: ansible-lint
 
 scenario:
-  name: opensuse-leap
+  name: centos-min
 
 verifier:
   name: testinfra
