@@ -21,7 +21,7 @@ galaxy_info:
         - jessie
     - name: Fedora
       versions:
-        - 27
+        - 28
   galaxy_tags:
     - golang
     - development
