@@ -19,7 +19,6 @@ galaxy_info:
       versions:
         - stretch
         - jessie
-        - wheezy
     - name: Fedora
       versions:
         - 27
