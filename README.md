@@ -76,6 +76,7 @@ configuration (for other versions follow the Advanced Configuration
 instructions):
 
 * `1.11.1`
+* `1.11`
 * `1.10.4`
 * `1.10.3`
 * `1.10.2`
