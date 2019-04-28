@@ -11,6 +11,7 @@ lint:
 platforms:
   - name: ansible-role-golang-debian-max
     image: debian:9
+    dockerfile: ../default/Dockerfile.j2
 
 provisioner:
   name: ansible

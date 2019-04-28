@@ -11,6 +11,7 @@ lint:
 platforms:
   - name: ansible-role-golang-ubuntu-min
     image: ubuntu:14.04
+    dockerfile: ../default/Dockerfile.j2
 
 provisioner:
   name: ansible
