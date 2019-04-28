@@ -58,6 +58,9 @@ matrix:
     - env:
         - MOLECULEW_ANSIBLE=2.7.0
         - MOLECULE_SCENARIO=opensuse
+    - env:
+        - MOLECULEW_ANSIBLE=2.7.0
+        - MOLECULE_SCENARIO=ubuntu-max-go-eol
 
 # Require the standard build environment
 sudo: required
