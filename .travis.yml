@@ -11,28 +11,28 @@ env:
 matrix:
   include:
     - env:
-        - MOLECULEW_ANSIBLE=2.5.10
+        - MOLECULEW_ANSIBLE=2.6.18
         - MOLECULE_SCENARIO=centos-min
     - env:
-        - MOLECULEW_ANSIBLE=2.5.10
+        - MOLECULEW_ANSIBLE=2.6.18
         - MOLECULE_SCENARIO=centos-max
     - env:
-        - MOLECULEW_ANSIBLE=2.5.10
+        - MOLECULEW_ANSIBLE=2.6.18
         - MOLECULE_SCENARIO=debian-max
     - env:
-        - MOLECULEW_ANSIBLE=2.5.10
+        - MOLECULEW_ANSIBLE=2.6.18
         - MOLECULE_SCENARIO=debian-min
     - env:
-        - MOLECULEW_ANSIBLE=2.5.10
+        - MOLECULEW_ANSIBLE=2.6.18
         - MOLECULE_SCENARIO=default
     - env:
-        - MOLECULEW_ANSIBLE=2.5.10
+        - MOLECULEW_ANSIBLE=2.6.18
         - MOLECULE_SCENARIO=ubuntu-min
     - env:
-        - MOLECULEW_ANSIBLE=2.5.10
+        - MOLECULEW_ANSIBLE=2.6.18
         - MOLECULE_SCENARIO=fedora
     - env:
-        - MOLECULEW_ANSIBLE=2.5.10
+        - MOLECULEW_ANSIBLE=2.6.18
         - MOLECULE_SCENARIO=opensuse
     - env:
         - MOLECULEW_ANSIBLE=2.8.2
