@@ -62,9 +62,6 @@ matrix:
         - MOLECULEW_ANSIBLE=2.9.1
         - MOLECULE_SCENARIO=ubuntu-max-go-eol
 
-# Require the standard build environment
-sudo: required
-
 # Require Ubuntu 16.04
 dist: xenial
 
