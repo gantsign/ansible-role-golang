@@ -9,9 +9,9 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 
 @pytest.mark.parametrize('name,pattern', [
-    ('GOROOT', '^/opt/go/1.12.17$'),
+    ('GOROOT', '^/opt/go/1.13.9$'),
     ('GOPATH', '^/root/workspace-go$'),
-    ('PATH', '^(.+:)?/opt/go/1.12.17/bin(:.+)?$'),
+    ('PATH', '^(.+:)?/opt/go/1.13.9/bin(:.+)?$'),
     ('PATH', '^(.+:)?/root/workspace-go/bin(:.+)?$')
 ])
 def test_go_env(host, name, pattern):
@@ -25,7 +25,6 @@ def test_go(host):
 
 
 @pytest.mark.parametrize('command', [
-    'godoc',
     'gofmt'
 ])
 def test_go_tools(host, command):
