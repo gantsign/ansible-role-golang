@@ -1,0 +1,19 @@
+---
+- name: create temporary download dir
+  tempfile:
+    state: directory
+  register: _tempfile_result
+
+- name: set go download path
+  set_fact:
+    golang_download_dir: "{{ _tempfile_result.path  }}"
+
+- name: download go sdk
+  get_url:
+    url: '{{ golang_mirror }}/{{ golang_archive_filename }}'
+    dest: '{{ golang_download_dir  }}/{{ golang_archive_filename }}'
+    sha256sum: '{{ golang_archive_sha256sum }}'
+    force: no
+    use_proxy: yes
+    validate_certs: yes
+    mode: 'u=rw,go=r'

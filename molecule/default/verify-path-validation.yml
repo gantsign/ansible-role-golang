@@ -1,0 +1,18 @@
+---
+- name: Test role path-validation.yml regex
+  import_tasks: ../../tasks/path-validation.yml
+  ignore_errors: "{{ test_case.negative_test | default (true) }}"
+
+- name: TEST_CASE - Assert install directory "{{ golang_install_dir }}" failed
+  assert:
+    that: _golang_install_dir_validation is failed
+  when:
+    - (test_case.assert_install_dir | default(false) | bool)
+    - (test_case.negative_test | default (true) | bool)
+
+- name: TEST_CASE - Assert GOPATH "{{ golang_gopath }}" failed
+  assert:
+    that: _golang_gopath_validation is failed
+  when:
+    - (test_case.assert_gopath | default(false) | bool)
+    - (test_case.negative_test | default (true) | bool)

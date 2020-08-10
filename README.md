@@ -1,16 +1,26 @@
 Ansible Role: Go language SDK
 =============================
 
-[![Build Status](https://travis-ci.org/gantsign/ansible-role-golang.svg?branch=master)](https://travis-ci.org/gantsign/ansible-role-golang)
+Original role by John Freeman/gantsign - https://github.com/gantsign
+
+This role has been updated with new features:
+- only run the setup tasks when go is not installed or at a different version
+- use tmp dir for download
+- update molecule converge playbook to converge.yml
+- use ansible to verify infrastructure
+- added validation against directories that should not be cleaned up
+- included testing for centos 8, debian buster, ubuntu focal fossa, fedora and suse.
+
+<!-- [![Build Status](https://travis-ci.org/gantsign/ansible-role-golang.svg?branch=master)](https://travis-ci.org/gantsign/ansible-role-golang)
 [![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-gantsign.golang-blue.svg)](https://galaxy.ansible.com/gantsign/golang)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/gantsign/ansible-role-golang/master/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/gantsign/ansible-role-golang/master/LICENSE) -->
 
 Role to download and install the [Go language SDK](https://golang.org/).
 
 Requirements
 ------------
 
-* Ansible >= 2.7
+* Ansible >= 2.9 (Might work on early versions)
 
 * Linux Distribution
 
@@ -20,11 +30,13 @@ Requirements
 
             * Jessie (8)
             * Stretch (9)
+            * Buster (10)
 
         * Ubuntu
 
             * Xenial (16.04)
             * Bionic (18.04)
+            * Focal Fossa (20.04)
 
     * RedHat Family
 
@@ -32,16 +44,19 @@ Requirements
 
             * 6
             * 7
+            * 8
 
         * Fedora
 
             * 31
+            * 32
 
     * SUSE Family
 
         * openSUSE
 
             * 15.1
+            * 15.2
 
     * Note: other versions are likely to work but have not been tested.
 
@@ -52,20 +67,28 @@ The following variables will change the behavior of this role (default values
 are shown below):
 
 ```yaml
+---
 # Go language SDK version number
 golang_version: '1.14.7'
 
 # Mirror to download the Go language SDK redistributable package from
 golang_mirror: 'https://storage.googleapis.com/golang'
 
-# Base installation directory the Go language SDK distribution
-golang_install_dir: '/opt/go/{{ golang_version }}'
+# GOROOT / installation directory for the Go SDK
+golang_install_dir: '/usr/local/go'
 
-# Directory to store files downloaded for Go language SDK installation
-golang_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
-
-# Location for GOPATH environment variable
+# Environment variable for GOPATH environment
 golang_gopath:
+```
+
+The below variables are use when re-installing golang at the same version.
+```yaml
+---
+# Cleanup golang GOROOT installation eg. '/usr/local/go'
+golang_install_clean: false
+
+# Cleanup golang GOPATH installation eg. '/home/user/go'
+golang_install_clean_all: false
 ```
 
 ### Supported Go language SDK Versions
@@ -75,87 +98,8 @@ configuration (for other versions follow the Advanced Configuration
 instructions):
 
 * `1.14.7`
-* `1.14.6`
-* `1.14.5`
-* `1.14.4`
-* `1.14.3`
-* `1.14.2`
-* `1.14.1`
-* `1.14`
 * `1.13.15`
-* `1.13.14`
-* `1.13.13`
-* `1.13.12`
-* `1.13.11`
-* `1.13.10`
-* `1.13.9`
-* `1.13.8`
-* `1.13.7`
-* `1.13.6`
-* `1.13.5`
-* `1.13.4`
-* `1.13.3`
-* `1.13.2`
-* `1.13.1`
-* `1.13`
-* `1.12.17`
-* `1.12.16`
-* `1.12.15`
-* `1.12.14`
-* `1.12.13`
-* `1.12.12`
-* `1.12.11`
-* `1.12.10`
-* `1.12.9`
-* `1.12.8`
-* `1.12.7`
-* `1.12.6`
-* `1.12.5`
-* `1.12.4`
-* `1.12.3`
-* `1.12.2`
-* `1.12.1`
-* `1.12`
-* `1.11.13`
-* `1.11.12`
-* `1.11.11`
-* `1.11.10`
-* `1.11.9`
-* `1.11.8`
-* `1.11.7`
-* `1.11.6`
-* `1.11.5`
-* `1.11.4`
-* `1.11.3`
-* `1.11.2`
-* `1.11.1`
-* `1.11`
-* `1.10.8`
-* `1.10.7`
-* `1.10.6`
-* `1.10.5`
-* `1.10.4`
-* `1.10.3`
-* `1.10.2`
-* `1.10.1`
-* `1.10`
-* `1.9.6`
-* `1.9.5`
-* `1.9.4`
-* `1.9.3`
-* `1.9.2`
-* `1.9.1`
-* `1.9`
-* `1.8.7`
-* `1.8.6`
-* `1.8.5`
-* `1.8.4`
-* `1.8.3`
-* `1.8.2`
-* `1.8.1`
-* `1.8`
-* `1.7.4`
-* `1.7.3`
+
 
 Advanced Configuration
 ----------------------
@@ -166,7 +110,7 @@ the variable below:
 
 ```yaml
 # SHA256 sum for the redistributable package (i.e. "go{{ golang_version }}.linux-amd64.tar.gz")
-golang_redis_sha256sum: '6e3e9c949ab4695a204f74038717aa7b2689b1be94875899ac1b3fe42800ff82'
+golang_archive_sha256sum: '6e3e9c949ab4695a204f74038717aa7b2689b1be94875899ac1b3fe42800ff82'
 ```
 
 Example Playbook
@@ -175,8 +119,7 @@ Example Playbook
 ```yaml
 - hosts: servers
   roles:
-     - role: gantsign.golang
-       golang_gopath: '$HOME/workspace-go'
+     - golang
 ```
 
 Role Facts
@@ -186,11 +129,11 @@ This role exports the following Ansible facts for use by other roles:
 
 * `ansible_local.golang.general.version`
 
-    * e.g. `1.7.3`
+    * e.g. `1.14.7`
 
 * `ansible_local.golang.general.home`
 
-    * e.g. `/opt/golang/1.7.3`
+    * e.g. `/usr/local/go`
 
 More Roles From GantSign
 ------------------------

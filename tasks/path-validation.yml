@@ -1,0 +1,34 @@
+---
+- name: ensure go root install directory choice is sane
+  assert:
+    that:
+      # Ensures we are not using /usr/local , /usr/local/bin, /usr/local/sbin etc
+      - golang_install_dir is not regex('^\/usr\/local((\/(sbin|bin))+|\/?)(|\/?)$')
+      # Ensures we are not using /usr , /usr/bin, /usr/sbin etc
+      - golang_install_dir is not regex('^\/usr((\/(sbin|bin))+|\/?)(|\/?)$')
+      # Ensures we are not using /usr , /usr/bin, /usr/sbin etc
+      - golang_install_dir is not regex('^((\/(sbin|bin))+|\/?)(|\/?)$')
+      # Ensure we are not using /opt
+      - golang_install_dir is not regex('^(\/opt+\/?)$')
+      # Ensure we are not using /
+      - golang_install_dir is not regex('^(\/+\/?)$')
+    fail_msg: "'{{ golang_install_dir }}' is not a valid install dir/GOROOT for
+              this role - please append a directory, eg. '/usr/local/go'"
+  register: _golang_install_dir_validation
+
+- name: ensure go path directory choice is sane
+  assert:
+    that:
+      # Ensures we are not using /root
+      - golang_gopath is not regex('^\/root(|\/?)$')
+      # Ensure we are not using /home, /home/user
+      - golang_gopath is not regex('^\/home((\/\w+\/?$)+|\/?)$')
+      # Ensure we are not using $HOME
+      - golang_gopath is not regex('^\$HOME(|\/?)$')
+      # Ensure we are not using /opt
+      - golang_gopath is not regex('^(\/opt+\/?)$')
+      # Ensure we are not using /
+      - golang_gopath is not regex('^(\/+\/?)$')
+    fail_msg: "'{{ golang_gopath }}' is not a valid GOPATH for this role -
+              please append a directory eg. $HOME/go, or /home/user/go"
+  register: _golang_gopath_validation

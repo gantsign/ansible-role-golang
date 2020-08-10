@@ -1,0 +1,23 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint: |
+  yamllint .
+  ansible-lint
+platforms:
+  - name: ansible-role-golang-opensuse-15.2
+    image: opensuse/leap:15.2
+    dockerfile: ../default/Dockerfile.j2
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ../default/converge.yml
+    verify: ../default/verify.yml
+  lint:
+    name: ansible-lint
+scenario:
+  name: opensuse-15.2
+verifier:
+  name: ansible

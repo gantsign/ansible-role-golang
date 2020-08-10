@@ -1,0 +1,29 @@
+---
+- name: load a variables for the target OS architecture
+  include_vars: "{{ lookup('first_found', architecture_files) }}"
+  vars:
+    architecture_files:
+      - "../vars/golang-{{ ansible_architecture|lower }}.yml"
+      - "../vars/main.yml"
+
+- name: load target sha256sum for target golang version
+  include_vars: "{{ lookup('first_found', sha256sum_files) }}"
+  vars:
+    sha256sum_files:
+      - "../vars/versions/{{ golang_version }}-{{ ansible_architecture|lower }}.yml"
+      - "../vars/versions/default.yml"
+
+- name: validate go version variables
+  include_tasks: version-validation.yml
+
+- name: cleanup previous go installations
+  include_tasks: uninstall.yml
+
+- name: download go archive
+  include_tasks: download.yml
+
+- name: install go
+  include_tasks: install.yml
+
+- name: setup go local facts
+  include_tasks: local-facts.yml

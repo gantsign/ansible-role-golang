@@ -1,0 +1,116 @@
+---
+- name: Verify
+  hosts: all
+  tasks:
+    - name: Get profile based env variables
+      shell: ". /etc/profile && printf ${{ item }}"
+      args:
+        executable: /bin/bash
+      register: test_go_env_variables
+      changed_when: false
+      loop:
+        - GOROOT
+        - GOPATH
+        - PATH
+
+    - name: TEST_CASE - Check environment vars
+      assert:
+        that:
+          - test_go_env_variables.results.0.stdout == '/usr/local/go'
+          - test_go_env_variables.results.1.stdout == '/root/go'
+          - test_go_env_variables.results.2.stdout is regex('^(.+:)?/usr/local/go/bin(:.+)?$')
+          - test_go_env_variables.results.2.stdout is regex('^(.+:)?/root/go/bin(:.+)?$')
+
+    - name: Execute go binary version
+      shell:  ". /etc/profile && go version"
+      args:
+        executable: /bin/bash
+      changed_when: false
+      register: test_go_installed_version
+
+    - name: TEST_CASE - Check go installed
+      assert:
+        that:
+          - test_go_installed_version.stdout == 'go version go1.14.7 linux/amd64'
+          - test_go_installed_version.rc == 0
+
+    - name: Get go install path
+      shell: ". /etc/profile && which go"
+      args:
+        executable: /bin/bash
+      changed_when: false
+      register: test_go_install_path
+
+    - name: TEST_CASE - Check go install path
+      assert:
+        that:
+          - test_go_install_path.stdout == '/usr/local/go/bin/go'
+          - test_go_install_path.rc == 0
+
+    - name: Get gofmt install path
+      shell: ". /etc/profile && which gofmt"
+      args:
+        executable: /bin/bash
+      changed_when: false
+      register: test_gofmt_install_path
+
+    - name: TEST_CASE - Check gomft installed
+      assert:
+        that:
+          - test_gofmt_install_path.stdout == '/usr/local/go/bin/gofmt'
+          - test_gofmt_install_path.rc == 0
+
+    - name: Include install directory and goroot regex tests
+      include_tasks: ../default/verify-path-validation.yml
+      vars:
+        golang_install_dir: "{{ test_case.golang_install_dir | default('/usr/local/go') }}"
+        golang_gopath: "{{ test_case.golang_gopath | default('/home/user/go') }}"
+      loop_control:
+        loop_var: test_case
+      loop:
+        - golang_install_dir: '/usr/local'
+          assert_install_dir: true
+        - golang_install_dir: '/usr/local/'
+          assert_install_dir: true
+        - golang_install_dir: '/usr/local/go'
+          assert_install_dir: true
+          negative_test: false
+        - golang_install_dir: '/opt'
+          assert_install_dir: true
+        - golang_install_dir: '/opt/'
+          assert_install_dir: true
+        - golang_install_dir: '/opt/go'
+          assert_install_dir: true
+          negative_test: false
+        - golang_install_dir: '/'
+          assert_install_dir: true
+        - golang_gopath: '$HOME'
+          assert_gopath: true
+        - golang_gopath: '$HOME/'
+          assert_gopath: true
+        - golang_gopath: '$HOME/go'
+          assert_gopath: true
+          negative_test: false
+        - golang_gopath: '/home/user'
+          assert_gopath: true
+        - golang_gopath: '/home/user/'
+          assert_gopath: true
+        - golang_gopath: '/home/user/go'
+          assert_gopath: true
+          negative_test: false
+        - golang_gopath: '/root'
+          assert_gopath: true
+        - golang_gopath: '/root/'
+          assert_gopath: true
+        - golang_gopath: '/root/go'
+          assert_gopath: true
+          negative_test: false
+        - golang_gopath: '/opt'
+          assert_gopath: true
+        - golang_gopath: '/opt/'
+          assert_gopath: true
+        - golang_gopath: '/opt/go'
+          assert_gopath: true
+          negative_test: false
+        - golang_gopath: '/'
+          assert_gopath: true

@@ -1,0 +1,23 @@
+---
+# Set Go language SDK facts
+- name: create ansible facts.d directory
+  become: true
+  file:
+    state: directory
+    path: /etc/ansible/facts.d
+    owner: root
+    group: root
+    mode: 'u=rwx,go=rx'
+
+- name: install custom ansible go facts
+  become: true
+  template:
+    src: facts.j2
+    dest: /etc/ansible/facts.d/golang.fact
+    owner: root
+    group: root
+    mode: 'u=rw,go=r'
+
+- name: re-read facts
+  setup:
+      filter: ansible_local

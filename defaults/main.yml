@@ -5,11 +5,12 @@ golang_version: '1.14.7'
 # Mirror to download the Go language SDK redistributable package from
 golang_mirror: 'https://storage.googleapis.com/golang'
 
-# Base installation directory the Go language SDK distribution
-golang_install_dir: '/opt/go/{{ golang_version }}'
+# GOROOT / installation directory for the Go SDK
+golang_install_dir: '/usr/local/go'
 
-# Directory to store files downloaded for Go language SDK installation
-golang_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
-
-# Location for GOPATH environment variable
+# Environment variable for GOPATH environment
 golang_gopath:
+
+# Cleanup golang installation
+golang_install_clean: false
+golang_install_clean_all: false

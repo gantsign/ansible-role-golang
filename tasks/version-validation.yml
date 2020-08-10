@@ -1,0 +1,16 @@
+---
+- name: ensure golang archive variable is set
+  assert:
+    that:
+      - golang_archive_filename is defined
+      - golang_archive_filename|default()
+    fail_msg: "Unsupported system architecture,
+              please see README.md for supported architectures"
+
+- name: ensure golang archive variable is set
+  assert:
+    that:
+      - golang_archive_sha256sum is defined
+      - golang_archive_sha256sum|default()
+    fail_msg: "Unsupported golang version '{{ golang_version }}',
+              please see README.md for supported versions"

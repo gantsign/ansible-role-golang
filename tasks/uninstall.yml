@@ -1,0 +1,24 @@
+---
+- name: validate go path variables
+  include_tasks: path-validation.yml
+
+- name: remove go language sdk installation directory
+  become: true
+  file:
+    state: absent
+    path: '{{ golang_install_dir }}'
+
+- name: remove go workspace
+  when: golang_install_clean_all
+  block:
+  - name: Get {{ ansible_user }} GOPATH
+    shell: ". /etc/profile && printf $GOPATH"
+    args:
+      executable: /bin/bash
+    register: _golang_user_gopath
+
+  - name: remove go workspace for {{ ansible_user }}
+    become: true
+    file:
+      state: absent
+      path: "{{ _golang_user_gopath.stdout }}"

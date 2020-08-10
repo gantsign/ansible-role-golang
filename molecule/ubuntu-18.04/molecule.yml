@@ -7,13 +7,13 @@ lint: |
   yamllint .
   ansible-lint
 platforms:
-  - name: ansible-role-golang-ubuntu-20.04
-    image: ubuntu:20.04
+  - name: ansible-role-golang-ubuntu-18.04
+    image: ubuntu:18.04
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
 scenario:
-  name: default
+  name: ubuntu-18.04
 verifier:
   name: ansible

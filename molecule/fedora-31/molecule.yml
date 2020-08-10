@@ -1,0 +1,21 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint: |
+  yamllint .
+  ansible-lint
+platforms:
+  - name: ansible-role-golang-fedora-31
+    image: fedora:31
+    dockerfile: ../default/Dockerfile.j2
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ../default/converge.yml
+    verify: ../default/verify.yml
+scenario:
+  name: fedora-31
+verifier:
+  name: ansible
