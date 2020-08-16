@@ -5,20 +5,20 @@ dependency:
 driver:
   name: docker
 
-lint:
-  name: yamllint
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+  flake8
 
 platforms:
   - name: ansible-role-golang-centos-min
     image: centos:6
-    dockerfile: ../default/Dockerfile.j2
 
 provisioner:
   name: ansible
   playbooks:
-    converge: ../default/playbook.yml
-  lint:
-    name: ansible-lint
+    converge: ../default/converge.yml
 
 scenario:
   name: centos-min
@@ -26,5 +26,3 @@ scenario:
 verifier:
   name: testinfra
   directory: ../default/tests
-  lint:
-    name: flake8
