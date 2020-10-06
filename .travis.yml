@@ -11,28 +11,28 @@ env:
 jobs:
   include:
     - env:
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
         - MOLECULE_SCENARIO=centos-min
     - env:
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
         - MOLECULE_SCENARIO=centos-max
     - env:
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
         - MOLECULE_SCENARIO=debian-max
     - env:
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
         - MOLECULE_SCENARIO=debian-min
     - env:
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
         - MOLECULE_SCENARIO=default
     - env:
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
         - MOLECULE_SCENARIO=ubuntu-min
     - env:
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
         - MOLECULE_SCENARIO=fedora
     - env:
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
         - MOLECULE_SCENARIO=opensuse
     - env:
         - MOLECULEW_ANSIBLE=2.9.1
