@@ -20,9 +20,6 @@ provisioner:
   playbooks:
     converge: ../default/converge.yml
 
-scenario:
-  name: centos-min
-
 verifier:
   name: testinfra
   directory: ../default/tests
