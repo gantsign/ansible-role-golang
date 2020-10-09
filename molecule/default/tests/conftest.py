@@ -19,5 +19,4 @@ def pytest_runtest_setup(item):
     else:
         pytest.skip(
             "Test should run only from inside molecule.",
-            allow_module_level=True
-        )
+            allow_module_level=True)
