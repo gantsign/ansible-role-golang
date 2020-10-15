@@ -1,0 +1,3 @@
+---
+# SHA256 sum for the redistributable package
+golang_redis_sha256sum: '30700f7a9df3148df81013bd38715acd09ca5203b8e0aafa8b985306d5e9882e'
