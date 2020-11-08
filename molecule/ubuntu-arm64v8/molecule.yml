@@ -1,0 +1,25 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+  flake8
+
+platforms:
+  - name: ansible-role-golang-ubuntu-min
+    image: arm64v8/ubuntu:18.04
+
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ../default/converge.yml
+
+verifier:
+  name: testinfra
+  directory: ../default/tests
