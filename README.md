@@ -1,7 +1,7 @@
 Ansible Role: Go language SDK
 =============================
 
-[![Tests](https://github.com/gantsign/ansible-role-golang/workflows/Tests/badge.svg)
+[![Tests](https://github.com/gantsign/ansible-role-golang/workflows/Tests/badge.svg)](https://github.com/gantsign/ansible-role-golang/actions?query=workflow%3ATests)
 [![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-gantsign.golang-blue.svg)](https://galaxy.ansible.com/gantsign/golang)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/gantsign/ansible-role-golang/master/LICENSE)
 
