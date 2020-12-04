@@ -13,7 +13,7 @@ lint: |
 
 platforms:
   - name: ansible-role-golang-centos-max
-    image: centos:7
+    image: centos:8
 
 provisioner:
   name: ansible
