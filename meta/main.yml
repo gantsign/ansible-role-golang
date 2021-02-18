@@ -18,7 +18,6 @@ galaxy_info:
       versions:
         - buster
         - stretch
-        - jessie
     - name: Fedora
       versions:
         - 31
