@@ -16,8 +16,8 @@ galaxy_info:
         - bionic
     - name: Debian
       versions:
+        - buster
         - stretch
-        - jessie
     - name: Fedora
       versions:
         - 31
