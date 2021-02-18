@@ -22,7 +22,7 @@ jobs:
         architecture:
           - amd64
         ansible-version:
-          - '2.9.1'
+          - '2.10.7'
         molecule-scenario:
           - centos-min
           - centos-max
@@ -34,10 +34,10 @@ jobs:
           - opensuse
         include:
           - architecture: arm
-            ansible-version: '2.9.1'
+            ansible-version: '2.10.7'
             molecule-scenario: ubuntu-arm32v7
           - architecture: arm64
-            ansible-version: '2.9.1'
+            ansible-version: '2.10.7'
             molecule-scenario: ubuntu-arm64v8
           - architecture: amd64
             ansible-version: '2.8.16'
