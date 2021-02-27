@@ -27,7 +27,7 @@
   get_url:
     url: '{{ golang_mirror }}/{{ golang_redis_filename }}'
     dest: '{{ golang_download_dir }}/{{ golang_redis_filename }}'
-    sha256sum: '{{ golang_redis_sha256sum }}'
+    checksum: 'sha256:{{ golang_redis_sha256sum }}'
     force: no
     use_proxy: yes
     validate_certs: yes
