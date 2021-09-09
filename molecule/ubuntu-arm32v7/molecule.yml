@@ -13,7 +13,7 @@ lint: |
 
 platforms:
   - name: ansible-role-golang-ubuntu-min
-    image: arm32v7/ubuntu:18.04
+    image: arm32v7/ubuntu:20.04
 
 provisioner:
   name: ansible
