@@ -24,7 +24,7 @@ jobs:
         ansible-version:
           - '2.10.7'
         molecule-scenario:
-          - centos
+          - rocky
           - debian-max
           - debian-min
           - default
