@@ -21,10 +21,10 @@ galaxy_info:
         - bullseye
     - name: Fedora
       versions:
-        - 31
+        - 34
     - name: opensuse
       versions:
-        - 15.1
+        - 15.2
   galaxy_tags:
     - golang
     - development

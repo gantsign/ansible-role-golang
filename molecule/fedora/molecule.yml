@@ -13,7 +13,7 @@ lint: |
 
 platforms:
   - name: ansible-role-golang-fedora
-    image: fedora:31
+    image: fedora:34
 
 provisioner:
   name: ansible

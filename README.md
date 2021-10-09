@@ -36,13 +36,13 @@ Requirements
 
         * Fedora
 
-            * 31
+            * 34
 
     * SUSE Family
 
         * openSUSE
 
-            * 15.1
+            * 15.2
 
     * Note: other versions are likely to work but have not been tested.
 
@@ -54,7 +54,7 @@ are shown below):
 
 ```yaml
 # Go language SDK version number
-golang_version: '1.17.1'
+golang_version: '1.17.2'
 
 # Mirror to download the Go language SDK redistributable package from
 golang_mirror: 'https://storage.googleapis.com/golang'
@@ -75,8 +75,10 @@ The following versions of Go language SDK are supported without any additional
 configuration (for other versions follow the Advanced Configuration
 instructions):
 
+* `1.17.2`
 * `1.17.1`
 * `1.17`
+* `1.16.9`
 * `1.16.8`
 * `1.16.7`
 * `1.16.6`
