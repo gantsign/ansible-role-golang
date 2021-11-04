@@ -2,6 +2,17 @@
 - name: Converge
   hosts: all
 
+  pre_tasks:
+    # Workarround broken CA certerficates hash on Ubuntu 20.04 arm32
+    - name: rehash certificate
+      become: yes
+      command: c_rehash
+      when:
+        - ansible_architecture == 'armv7l'
+        - ansible_distribution == 'Ubuntu'
+        - ansible_distribution_version == '20.04'
+      changed_when: no
+
   roles:
     - role: ansible-role-golang
       golang_gopath: '$HOME/workspace-go'
