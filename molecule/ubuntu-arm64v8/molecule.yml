@@ -12,7 +12,7 @@ lint: |
   flake8
 
 platforms:
-  - name: ansible-role-golang-ubuntu-min
+  - name: ansible-role-golang-ubuntu-arm64
     image: arm64v8/ubuntu:20.04
 
 provisioner:
