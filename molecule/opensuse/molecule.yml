@@ -13,7 +13,7 @@ lint: |
 
 platforms:
   - name: ansible-role-golang-opensuse
-    image: opensuse/leap:15.2
+    image: opensuse/leap:15.3
 
 provisioner:
   name: ansible
