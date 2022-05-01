@@ -22,7 +22,7 @@ jobs:
         architecture:
           - amd64
         ansible-version:
-          - '2.10.7'
+          - '2.10.7' # max-ansible-test-version
         molecule-scenario:
           - rocky
           - debian-max
@@ -33,13 +33,13 @@ jobs:
           - opensuse
         include:
           - architecture: arm
-            ansible-version: '2.10.7'
+            ansible-version: '2.10.7' # max-ansible-test-version
             molecule-scenario: ubuntu-arm32v7
           - architecture: arm64
-            ansible-version: '2.10.7'
+            ansible-version: '2.10.7' # max-ansible-test-version
             molecule-scenario: ubuntu-arm64v8
           - architecture: amd64
-            ansible-version: '2.9.18'
+            ansible-version: '2.9.18' # min-ansible-test-version
             molecule-scenario: default
 
     env:
