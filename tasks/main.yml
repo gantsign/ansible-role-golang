@@ -32,6 +32,7 @@
     use_proxy: yes
     validate_certs: yes
     mode: 'u=rw,go=r'
+  when: not ansible_check_mode
 
 - name: create Go language SDK installation directory
   become: yes
@@ -49,7 +50,7 @@
       - gzip
       - tar
     state: present
-  when: ansible_pkg_mgr == 'zypper'
+  when: ansible_pkg_mgr == 'zypper' and not ansible_check_mode
 
 - name: install Go language SDK
   become: yes
@@ -61,6 +62,7 @@
     owner: root
     group: root
     creates: '{{ golang_install_dir }}/bin'
+  when: not ansible_check_mode
 
 # Set Go language SDK environment variables
 - name: make sure /etc/profile.d exists
@@ -99,6 +101,7 @@
     owner: root
     group: root
     mode: 'u=rw,go=r'
+  when: not ansible_check_mode
 
 - name: re-read facts
   setup:
