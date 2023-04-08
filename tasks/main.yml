@@ -1,62 +1,63 @@
+# code: language=ansible
 ---
-- name: load source vars
+- name: Load source vars
   with_first_found:
     - '../vars/architecture/{{ ansible_architecture | lower }}.yml'
     - ../vars/architecture/default.yml
-  include_vars: '{{ item }}'
+  ansible.builtin.include_vars: '{{ item }}'
 
-- name: load version vars
+- name: Load version vars
   with_first_found:
     - '../vars/versions/{{ golang_version }}-{{ golang_architecture }}.yml'
     - '../vars/versions/{{ golang_version }}.yml'
     - ../vars/versions/default.yml
-  include_vars: '{{ item }}'
+  ansible.builtin.include_vars: '{{ item }}'
 
-- name: assert version vars
-  assert:
+- name: Assert version vars
+  ansible.builtin.assert:
     that:
       - "golang_redis_sha256sum not in (None, '')"
 
-- name: create download directory
-  file:
+- name: Create download directory
+  ansible.builtin.file:
     state: directory
     mode: 'u=rwx,go=rx'
     dest: '{{ golang_download_dir }}'
 
-- name: download Go language SDK
-  get_url:
+- name: Download Go language SDK
+  ansible.builtin.get_url:
     url: '{{ golang_mirror }}/{{ golang_redis_filename }}'
     dest: '{{ golang_download_dir }}/{{ golang_redis_filename }}'
     checksum: 'sha256:{{ golang_redis_sha256sum }}'
-    force: no
-    use_proxy: yes
-    validate_certs: yes
+    force: false
+    use_proxy: true
+    validate_certs: true
     mode: 'u=rw,go=r'
   when: not ansible_check_mode
 
-- name: create Go language SDK installation directory
-  become: yes
-  file:
+- name: Create Go language SDK installation directory
+  become: true
+  ansible.builtin.file:
     state: directory
     owner: root
     group: root
     mode: 'u=rwx,go=rx'
     dest: '{{ golang_install_dir }}'
 
-- name: install unarchive dependencies (zypper)
-  become: yes
-  zypper:
+- name: Install unarchive dependencies (zypper)
+  become: true
+  ansible.builtin.zypper:
     name:
       - gzip
       - tar
     state: present
   when: ansible_pkg_mgr == 'zypper' and not ansible_check_mode
 
-- name: install Go language SDK
-  become: yes
-  unarchive:
+- name: Install Go language SDK
+  become: true
+  ansible.builtin.unarchive:
     src: '{{ golang_download_dir }}/{{ golang_redis_filename }}'
-    remote_src: yes
+    remote_src: true
     extra_opts: '--strip-components=1'
     dest: '{{ golang_install_dir }}'
     owner: root
@@ -65,18 +66,18 @@
   when: not ansible_check_mode
 
 # Set Go language SDK environment variables
-- name: make sure /etc/profile.d exists
-  become: yes
-  file:
+- name: Make sure /etc/profile.d exists
+  become: true
+  ansible.builtin.file:
     path: /etc/profile.d
     state: directory
     owner: root
     group: root
     mode: 'u=rwx,go=rx'
 
-- name: export Go language SDK environment variables
-  become: yes
-  template:
+- name: Export Go language SDK environment variables
+  become: true
+  ansible.builtin.template:
     src: golang.sh.j2
     dest: /etc/profile.d/golang.sh
     owner: root
@@ -84,18 +85,18 @@
     mode: 'u=rw,go=r'
 
 # Set Go language SDK facts
-- name: create Ansible facts.d directory
-  become: yes
-  file:
+- name: Create Ansible facts.d directory
+  become: true
+  ansible.builtin.file:
     state: directory
     dest: /etc/ansible/facts.d
     owner: root
     group: root
     mode: 'u=rwx,go=rx'
 
-- name: install Go language SDK facts
-  become: yes
-  template:
+- name: Install Go language SDK facts
+  become: true
+  ansible.builtin.template:
     src: facts.j2
     dest: /etc/ansible/facts.d/golang.fact
     owner: root
@@ -103,6 +104,6 @@
     mode: 'u=rw,go=r'
   when: not ansible_check_mode
 
-- name: re-read facts
-  setup:
+- name: Re-read facts
+  ansible.builtin.setup:
     filter: ansible_local
