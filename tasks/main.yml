@@ -2,7 +2,7 @@
 ---
 - name: Load source vars
   with_first_found:
-    - '../vars/architecture/{{ ansible_architecture | lower }}.yml'
+    - '../vars/architecture/{{ ansible_facts.architecture | lower }}.yml'
     - ../vars/architecture/default.yml
   ansible.builtin.include_vars: '{{ item }}'
 
@@ -51,7 +51,7 @@
       - gzip
       - tar
     state: present
-  when: ansible_pkg_mgr == 'zypper' and not ansible_check_mode
+  when: ansible_facts.pkg_mgr == 'zypper' and not ansible_check_mode
 
 - name: Install Go language SDK
   become: true

@@ -9,9 +9,9 @@
       become: true
       command: c_rehash
       when:
-        - ansible_architecture == 'armv7l'
-        - ansible_distribution == 'Ubuntu'
-        - ansible_distribution_version == '20.04'
+        - ansible_facts.architecture == 'armv7l'
+        - ansible_facts.distribution == 'Ubuntu'
+        - ansible_facts.distribution_version == '20.04'
       changed_when: false
 
   roles:
@@ -23,7 +23,7 @@
       package:
         name: which
         state: present
-      when: ansible_pkg_mgr in ('yum', 'dnf', 'zypper')
+      when: ansible_facts.pkg_mgr in ('yum', 'dnf', 'zypper')
 
     # provides /etc/profile
     - name: Install aaa_base (zypper)
@@ -31,4 +31,4 @@
       ansible.builtin.zypper:
         name: aaa_base
         state: present
-      when: ansible_pkg_mgr == 'zypper'
+      when: ansible_facts.pkg_mgr == 'zypper'

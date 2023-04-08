@@ -10,7 +10,7 @@ golang_mirror: 'https://storage.googleapis.com/golang'
 golang_install_dir: '/opt/go/{{ golang_version }}'
 
 # Directory to store files downloaded for Go language SDK installation
-golang_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
+golang_download_dir: "{{ x_ansible_download_dir | default(ansible_facts.env.HOME + '/.ansible/tmp/downloads') }}"
 
 # Location for GOPATH environment variable
 golang_gopath:
