@@ -10,7 +10,7 @@ Role to download and install the [Go language SDK](https://golang.org/).
 Requirements
 ------------
 
-* Ansible >= 2.9
+* Ansible >= 5 (Ansible Core >= 2.12)
 
 * Linux Distribution
 
