@@ -1,33 +1,34 @@
+# code: language=ansible
 ---
 - name: Converge
   hosts: all
 
   pre_tasks:
     # Workarround broken CA certerficates hash on Ubuntu 20.04 arm32
-    - name: rehash certificate
-      become: yes
+    - name: Rehash certificate
+      become: true
       command: c_rehash
       when:
         - ansible_architecture == 'armv7l'
         - ansible_distribution == 'Ubuntu'
         - ansible_distribution_version == '20.04'
-      changed_when: no
+      changed_when: false
 
   roles:
     - role: ansible-role-golang
       golang_gopath: '$HOME/workspace-go'
 
   post_tasks:
-    - name: install which
+    - name: Install which
       package:
         name: which
         state: present
       when: ansible_pkg_mgr in ('yum', 'dnf', 'zypper')
 
     # provides /etc/profile
-    - name: install aaa_base (zypper)
-      become: yes
-      zypper:
+    - name: Install aaa_base (zypper)
+      become: true
+      ansible.builtin.zypper:
         name: aaa_base
         state: present
       when: ansible_pkg_mgr == 'zypper'
