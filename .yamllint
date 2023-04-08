@@ -30,3 +30,5 @@ rules:
   new-lines:
     type: unix
   trailing-spaces: disable
+  truthy:
+    allowed-values: ['true', 'false', 'on']
