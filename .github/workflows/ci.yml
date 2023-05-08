@@ -67,7 +67,7 @@ jobs:
         molecule-scenario:
           - rocky
           - debian-max
-          # - debian-min
+          - debian-min
           - default
           - ubuntu-min
           - fedora
