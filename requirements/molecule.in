@@ -1,0 +1,3 @@
+ansible-compat<4
+molecule[docker]==4.0.4
+testinfra==5.3.1

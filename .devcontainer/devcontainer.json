@@ -1,0 +1,46 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
+{
+	"name": "ansible-role-golang",
+	"image": "mcr.microsoft.com/devcontainers/python:0-3.9",
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"installZsh": true,
+			"configureZshAsDefaultShell": true,
+			"installOhMyZsh": true
+		},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+		"ghcr.io/devcontainers/features/github-cli:1": {},
+		"ghcr.io/devcontainers-contrib/features/apt-get-packages:1": {
+			"packages": "fzf grc zoxide"
+		},
+		"ghcr.io/devcontainers-contrib/features/fd:1": {},
+		"ghcr.io/devcontainers-contrib/features/ripgrep:1": {},
+		"ghcr.io/devcontainers-contrib/features/starship:1": {},
+		"ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {
+			"plugins": "autopep8 dirhistory docker fd fzf git-escape-magic gh git grc pip pipenv ripgrep starship sudo zoxide zsh-autosuggestions zsh-syntax-highlighting",
+			"omzPlugins": "https://github.com/zsh-users/zsh-autosuggestions https://github.com/zsh-users/zsh-syntax-highlighting.git"
+		}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"DavidAnson.vscode-markdownlint",
+				"donjayamanne.githistory",
+				"EditorConfig.EditorConfig",
+				"github.vscode-github-actions",
+				"GitHub.vscode-pull-request-github",
+				"ldez.ignore-files",
+				"me-dutour-mathieu.vscode-github-actions",
+				"oderwat.indent-rainbow",
+				"redhat.ansible",
+				"streetsidesoftware.code-spell-checker",
+				"wholroyd.jinja"
+			]
+		}
+	},
+	"remoteEnv": {
+		"PATH": "/home/vscode/.local/bin:${containerEnv:PATH}"
+	},
+	"postCreateCommand": "pip3 install --user -r requirements/dev.txt"
+}

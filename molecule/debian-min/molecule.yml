@@ -7,15 +7,9 @@ driver:
 
 role_name_check: 2
 
-lint: |
-  set -e
-  yamllint .
-  ansible-lint .
-  flake8
-
 platforms:
   - name: ansible-role-golang-debian-min
-    image: debian:9
+    image: debian:10
 
 provisioner:
   name: ansible

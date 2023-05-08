@@ -46,7 +46,7 @@
 
 - name: Install unarchive dependencies (zypper)
   become: true
-  ansible.builtin.zypper:
+  ansible.builtin.package:
     name:
       - gzip
       - tar

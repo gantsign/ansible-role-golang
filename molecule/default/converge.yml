@@ -7,7 +7,7 @@
     # Workarround broken CA certerficates hash on Ubuntu 20.04 arm32
     - name: Rehash certificate
       become: true
-      command: c_rehash
+      ansible.builtin.command: c_rehash
       when:
         - ansible_facts.architecture == 'armv7l'
         - ansible_facts.distribution == 'Ubuntu'
@@ -20,7 +20,7 @@
 
   post_tasks:
     - name: Install which
-      package:
+      ansible.builtin.package:
         name: which
         state: present
       when: ansible_facts.pkg_mgr in ('yum', 'dnf', 'zypper')
@@ -28,7 +28,7 @@
     # provides /etc/profile
     - name: Install aaa_base (zypper)
       become: true
-      ansible.builtin.zypper:
+      ansible.builtin.package:
         name: aaa_base
         state: present
       when: ansible_facts.pkg_mgr == 'zypper'
