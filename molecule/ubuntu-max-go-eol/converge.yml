@@ -5,5 +5,5 @@
 
   roles:
     - role: ansible-role-golang
-      golang_version: '1.19.9'
+      golang_version: '1.19.10'
       golang_gopath: '$HOME/workspace-go'
