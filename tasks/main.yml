@@ -2,6 +2,7 @@
 ---
 - name: Load source vars
   with_first_found:
+    - '../vars/architecture/{{ ansible_facts.architecture | lower }}-{{ ansible_facts.userspace_bits }}.yml'
     - '../vars/architecture/{{ ansible_facts.architecture | lower }}.yml'
     - ../vars/architecture/default.yml
   ansible.builtin.include_vars: '{{ item }}'
