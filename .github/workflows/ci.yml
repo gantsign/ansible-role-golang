@@ -8,7 +8,6 @@ on:
 
 env:
   PY_COLORS: '1'
-  ANSIBLE_FORCE_COLOR: '1'
 
 jobs:
   lint:
@@ -43,7 +42,7 @@ jobs:
         run: pip3 install --no-compile -r requirements/tox.txt
 
       - name: Lint
-        run: tox run -e lint
+        run: tox --colored=yes run -e lint
 
       - name: Compact lint cache
         if: steps.lint-cache.outputs.cache-hit != 'true'
@@ -119,7 +118,7 @@ jobs:
         run: pip3 install --no-compile -r requirements/tox.txt
 
       - name: Molecule test
-        run: tox run -e ansible-${{ matrix.ansible-version }} -- --scenario-name=${{ matrix.molecule-scenario }}
+        run: tox --colored=yes run -e ansible-${{ matrix.ansible-version }} -- --scenario-name=${{ matrix.molecule-scenario }}
 
       - name: Compact Molecule cache
         if: steps.molecule-cache.outputs.cache-hit != 'true'
