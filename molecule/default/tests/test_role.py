@@ -3,9 +3,9 @@ import re
 
 
 @pytest.mark.parametrize('name,pattern', [
-    ('GOROOT', '^/opt/go/1.21.0$'),
+    ('GOROOT', '^/opt/go/1.21.1$'),
     ('GOPATH', '^/root/workspace-go$'),
-    ('PATH', '^(.+:)?/opt/go/1.21.0/bin(:.+)?$'),
+    ('PATH', '^(.+:)?/opt/go/1.21.1/bin(:.+)?$'),
     ('PATH', '^(.+:)?/root/workspace-go/bin(:.+)?$')
 ])
 def test_go_env(host, name, pattern):
