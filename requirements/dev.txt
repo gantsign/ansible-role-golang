@@ -189,7 +189,7 @@ tomli==2.0.1
     #   tox
 tox==4.5.1
     # via -r tox.in
-urllib3==1.26.16
+urllib3==1.26.17
     # via
     #   -r molecule.in
     #   docker
