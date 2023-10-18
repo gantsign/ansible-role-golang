@@ -268,7 +268,7 @@ Example Playbook
 ```yaml
 - hosts: servers
   roles:
-     - role: gantsign.golang
+     - role: gantsign.ansible-role-golang
        golang_gopath: '$HOME/workspace-go'
 ```
 
@@ -289,7 +289,7 @@ More Roles From GantSign
 ------------------------
 
 You can find more roles from GantSign on
-[Ansible Galaxy](https://galaxy.ansible.com/gantsign).
+[Ansible Galaxy](https://galaxy.ansible.com/ui/standalone/namespaces/2463/).
 
 Development & Testing
 ---------------------
