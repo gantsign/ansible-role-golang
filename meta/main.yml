@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: golang
   author: John Freeman
   description: Role for installing the Go language SDK.
   company: GantSign Ltd.
