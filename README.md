@@ -270,7 +270,7 @@ Example Playbook
 ```yaml
 - hosts: servers
   roles:
-     - role: gantsign.ansible-role-golang
+     - role: gantsign.golang
        golang_gopath: '$HOME/workspace-go'
 ```
 
