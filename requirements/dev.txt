@@ -53,7 +53,7 @@ colorama==0.4.6
     # via tox
 cookiecutter==2.2.3
     # via molecule
-cryptography==41.0.4
+cryptography==41.0.6
     # via ansible-core
 distlib==0.3.7
     # via virtualenv
@@ -97,6 +97,7 @@ mdurl==0.1.2
 molecule[docker]==4.0.4
     # via
     #   -r molecule.in
+    #   molecule
     #   molecule-docker
 molecule-docker==2.1.0
     # via molecule
