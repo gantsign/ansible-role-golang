@@ -9,7 +9,7 @@ role_name_check: 2
 
 platforms:
   - name: ansible-role-golang-opensuse
-    image: opensuse/leap:15.3
+    image: opensuse/leap:15.5
 
 provisioner:
   name: ansible
