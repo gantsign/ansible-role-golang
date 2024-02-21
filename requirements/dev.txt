@@ -53,7 +53,7 @@ colorama==0.4.6
     # via tox
 cookiecutter==2.2.3
     # via molecule
-cryptography==42.0.2
+cryptography==42.0.4
     # via ansible-core
 distlib==0.3.7
     # via virtualenv
