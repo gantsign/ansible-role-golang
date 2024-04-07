@@ -8,9 +8,9 @@ ansible-compat==4.1.11 \
     --hash=sha256:74a91807808a39af48ab6595811b9340d1458db26b138362f48bf39292190705 \
     --hash=sha256:b3e9f9d7c3a1ce6222de444e9dc6fece7eba70ac64f2a0befdc4e2d542018b4a
     # via molecule
-ansible-core==2.15.10 \
-    --hash=sha256:42e49f1a6d8cf6cccde775c06c1394885353b71ad9e5f670c6f32d2890127ce8 \
-    --hash=sha256:954dbe8e4e802a4dd5df0366193975b692a05806aa8d7358418a7e617346b20f
+ansible-core==2.15.9 \
+    --hash=sha256:25f9b1b5a5af3c0986bd3928ed086eaddb867527fb5c83afef1a03cfad34f345 \
+    --hash=sha256:5b6a4b12aa5358f60933e79d86763e3558862282fb1dc563a29b9999e5849fc3
     # via
     #   ansible-compat
     #   molecule
@@ -336,12 +336,12 @@ molecule==6.0.3 \
     --hash=sha256:8e5d7a7841f9ed5dd26878d24951ec030b86f780aca17ffc509db8076f42de3d \
     --hash=sha256:d2a881062fcc5ef1e08c1e5127c04354d2c95171955e270bd82b3fbfef72d3b0
     # via
-    #   -r ./molecule.in
+    #   -r molecule.in
     #   molecule-plugins
 molecule-plugins[docker]==23.5.3 \
     --hash=sha256:87f8ac8d5e9fe1cbdfb784d92b1fd08e7cb11bf02a9391bb34dcb93fadf7a3fc \
     --hash=sha256:a2b1437d532d736e3fbc6db7a69ec533e2334b2115ff9245a0b2772ed9738d23
-    # via -r ./molecule.in
+    # via -r molecule.in
 packaging==24.0 \
     --hash=sha256:2ddfb553fdf02fb784c234c7ba6ccc288296ceabec964ad2eae3777778130bc5 \
     --hash=sha256:eb82c5e3e56209074766e6885bb04b8c38a0c015d0a30036ebe7ece34c9989e9
@@ -369,12 +369,12 @@ pytest==7.4.4 \
     --hash=sha256:2cf0005922c6ace4a3e2ec8b4080eb0d9753fdc93107415332f50ce9e7994280 \
     --hash=sha256:b090cdf5ed60bf4c45261be03239c2c1c22df034fbffe691abe93cd80cea01d8
     # via
-    #   -r ./molecule.in
+    #   -r molecule.in
     #   pytest-testinfra
 pytest-testinfra==10.1.0 \
     --hash=sha256:0a03b7f21c863396adba9578880e5a1a6764e9d20bb603e25317883fdeda024b \
     --hash=sha256:f774339b94775acdf3a8c4a3793a8ead2e8dfc70ff34b778be15aaba140fa19e
-    # via -r ./molecule.in
+    # via -r molecule.in
 pyyaml==6.0.1 \
     --hash=sha256:04ac92ad1925b2cff1db0cfebffb6ffc43457495c9b3c39d3fcae417d7125dc5 \
     --hash=sha256:062582fca9fabdd2c8b54a3ef1c978d786e0f6b3a1510e0ac93ef59e0ddae2bc \

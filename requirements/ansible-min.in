@@ -1,2 +1,2 @@
-ansible-core==2.12.10
+ansible-core==2.15.9
 -r molecule.in
