@@ -8,7 +8,7 @@ ansible-compat==4.1.11
     # via
     #   ansible-lint
     #   molecule
-ansible-core==2.15.10
+ansible-core==2.15.9
     # via
     #   -r ansible-max.in
     #   ansible-compat
