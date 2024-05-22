@@ -65,7 +65,7 @@ filelock==3.13.3
     #   virtualenv
 flake8==4.0.1
     # via -r lint.in
-idna==3.6
+idna==3.7
     # via requests
 importlib-metadata==7.1.0
     # via build
