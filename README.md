@@ -20,6 +20,7 @@ Requirements
 
             * Buster (10)
             * Bullseye (11)
+            * Bookworm (12)
 
         * Ubuntu
 
