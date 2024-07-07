@@ -254,3 +254,6 @@ __pycache__
 
 ### For development ###
 .venv
+
+### DevPod ###
+.devpod-internal
