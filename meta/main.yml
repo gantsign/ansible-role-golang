@@ -22,7 +22,7 @@ galaxy_info:
         - bookworm
     - name: Fedora
       versions:
-        - '35'
+        - '40'
     - name: opensuse
       versions:
         - '15.5'
