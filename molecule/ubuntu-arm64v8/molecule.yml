@@ -9,7 +9,7 @@ role_name_check: 2
 
 platforms:
   - name: ansible-role-golang-ubuntu-arm64
-    image: arm64v8/ubuntu:22.04
+    image: arm64v8/ubuntu:24.04
 
 provisioner:
   name: ansible

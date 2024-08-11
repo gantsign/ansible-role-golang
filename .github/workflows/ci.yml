@@ -12,7 +12,7 @@ env:
 jobs:
   lint:
     name: Lint
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout
@@ -54,7 +54,7 @@ jobs:
 
   test:
     name: Molecule test
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     strategy:
       max-parallel: 3
@@ -131,7 +131,7 @@ jobs:
   test-all:
     if: ${{ always() }}
     name: Test (matrix)
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs:
       - lint
       - test
