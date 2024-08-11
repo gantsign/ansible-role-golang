@@ -24,7 +24,6 @@ Requirements
 
         * Ubuntu
 
-            * Bionic (18.04)
             * Focal (20.04)
             * Jammy (22.04)
 
