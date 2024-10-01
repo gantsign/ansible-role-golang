@@ -2,7 +2,15 @@
 
 {{ ansible_managed | comment('plain') }}
 
+
 export GOROOT='{{ golang_install_dir }}'
+
+# move binary with go version, to make binary alias
+if test -f "$GOROOT/bin/go"; then
+    mv $GOROOT/bin/go $GOROOT/bin/go{{ golang_version }}
+    mv $GOROOT/bin/gofmt $GOROOT/bin/gofmt{{ golang_version }}
+fi
+
 export PATH=$GOROOT/bin:$PATH
 
 {% if golang_gopath not in (None, '') %}
