@@ -140,10 +140,8 @@ pyproject-hooks==1.2.0
     # via
     #   build
     #   pip-tools
-pytest==7.4.4
-    # via
-    #   -r molecule.in
-    #   pytest-testinfra
+pytest==8.3.3
+    # via pytest-testinfra
 pytest-testinfra==10.1.1
     # via -r molecule.in
 pyyaml==6.0.2
