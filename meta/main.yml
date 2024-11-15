@@ -25,7 +25,7 @@ galaxy_info:
         - '40'
     - name: opensuse
       versions:
-        - '15.5'
+        - all
   galaxy_tags:
     - golang
     - development
