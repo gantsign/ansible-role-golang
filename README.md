@@ -24,7 +24,6 @@ Requirements
 
         * Ubuntu
 
-            * Focal (20.04)
             * Jammy (22.04)
             * Noble (24.04)
 
