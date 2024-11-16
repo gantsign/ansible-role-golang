@@ -4,16 +4,6 @@
   hosts: all
 
   pre_tasks:
-    # Workaround broken CA certerficates hash on Ubuntu 20.04 arm32
-    - name: Rehash certificate
-      become: true
-      ansible.builtin.command: c_rehash
-      when:
-        - ansible_facts.architecture == 'armv7l'
-        - ansible_facts.distribution == 'Ubuntu'
-        - ansible_facts.distribution_version == '20.04'
-      changed_when: false
-
     # Workaround for Fedora 41 https://github.com/ansible/ansible/issues/84206
     - name: Install python3-libdnf5
       become: true
