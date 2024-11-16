@@ -34,7 +34,7 @@ Requirements
 
         * Fedora
 
-            * 40
+            * 41
 
     * SUSE Family
 
