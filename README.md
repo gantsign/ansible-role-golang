@@ -26,6 +26,7 @@ Requirements
 
             * Focal (20.04)
             * Jammy (22.04)
+            * Noble (24.04)
 
     * RedHat Family
 
@@ -35,13 +36,13 @@ Requirements
 
         * Fedora
 
-            * 35
+            * 40
 
     * SUSE Family
 
         * openSUSE
 
-            * 15.5
+            * Tumbleweed
 
     * Note: other versions are likely to work but have not been tested.
 
