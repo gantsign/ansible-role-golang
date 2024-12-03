@@ -8,11 +8,11 @@ ansible-compat==24.10.0 \
     --hash=sha256:0415bcd82f7d84e5b344c03439154c1f16576809dc3a523b81178354c86ae5a1 \
     --hash=sha256:0ad873e0dae8b2de79bc33ced813d6c92c716c4d7b82f9a4693e1fd57f43776e
     # via molecule
-ansible-core==2.16.13 \
-    --hash=sha256:45194e11efe3c4c0c9bb0b112b6ddc1ca5028a01be6b41bae593576a8b1127af \
-    --hash=sha256:859cd5ac00c5e52a8d63906985691d0fd1b8ed4f0600862a5e360bd1fd5f8f53
+ansible-core==2.17.7 \
+    --hash=sha256:3aaab735d6c4e2d6239bc326800dc0ecda2a1490caa8455b41084ec0bc54dacf \
+    --hash=sha256:64d4f0a006687a5621aa80dca54fd0c5ae75145b7aac8c1b8d7f07a1399c4705
     # via
-    #   -r ./ansible-min.in
+    #   -r ansible-min.in
     #   ansible-compat
     #   molecule
 attrs==24.2.0 \
@@ -359,12 +359,12 @@ molecule==24.9.0 \
     --hash=sha256:8548eda13c31a1ea41ba0786b29dde466cfb812617c25792151335b17a410f63 \
     --hash=sha256:ecb15e4c6b66e208e0621e19b100d471a06cd114371f46449620e7eda3ec0a62
     # via
-    #   -r ./molecule.in
+    #   -r molecule.in
     #   molecule-plugins
 molecule-plugins[docker]==23.5.3 \
     --hash=sha256:87f8ac8d5e9fe1cbdfb784d92b1fd08e7cb11bf02a9391bb34dcb93fadf7a3fc \
     --hash=sha256:a2b1437d532d736e3fbc6db7a69ec533e2334b2115ff9245a0b2772ed9738d23
-    # via -r ./molecule.in
+    # via -r molecule.in
 packaging==24.2 \
     --hash=sha256:09abb1bccd265c01f4a3aa3f7a7db064b36514d2cba19a2f694fe6150451a759 \
     --hash=sha256:c228a6dc5e932d346bc5739379109d49e8853dd8223571c7c5b55260edc0b97f
@@ -394,7 +394,7 @@ pytest==8.3.3 \
 pytest-testinfra==10.1.1 \
     --hash=sha256:a876f1453a01b58d94d9d936dd50344c2c01ac7880a2b41d15bdf233aed9cf1f \
     --hash=sha256:b990dc7d77b49a1bba24818fbff49b6171d8c46d606fb5ca86b937de690d7062
-    # via -r ./molecule.in
+    # via -r molecule.in
 pyyaml==6.0.2 \
     --hash=sha256:01179a4a8559ab5de078078f37e5c1a30d76bb88519906844fd7bdea1b7729ff \
     --hash=sha256:0833f8694549e586547b576dcfaba4a6b55b9e96098b36cdc7ebefe667dfed48 \
