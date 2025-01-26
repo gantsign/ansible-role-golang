@@ -1,7 +1,7 @@
 # code: language=ansible
 ---
 # Go language SDK version number
-golang_version: '1.23.3'
+golang_version: '1.23.5'
 
 # Mirror to download the Go language SDK redistributable package from
 golang_mirror: 'https://storage.googleapis.com/golang'
