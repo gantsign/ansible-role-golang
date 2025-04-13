@@ -69,7 +69,7 @@ importlib-metadata==8.6.1
     # via ansible-lint
 iniconfig==2.0.0
     # via pytest
-jinja2==3.1.5
+jinja2==3.1.6
     # via
     #   ansible-core
     #   molecule
