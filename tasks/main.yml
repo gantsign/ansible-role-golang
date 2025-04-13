@@ -80,7 +80,7 @@
   become: true
   ansible.builtin.template:
     src: golang.sh.j2
-    dest: /etc/profile.d/golang.sh
+    dest: /etc/profile.d/golang{{ golang_version }}.sh
     owner: root
     group: root
     mode: 'u=rw,go=r'
