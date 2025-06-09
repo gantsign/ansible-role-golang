@@ -11,6 +11,13 @@ from packaging.version import Version
 # Constants
 # https://pkg.go.dev/golang.org/x/website/internal/dl
 GO_DOWNLOAD_URL = 'https://go.dev/dl/?mode=json&include=all'
+GO_SUPPORTED_ARCH = [
+    'amd64',
+    'armv6l',
+    'arm64',
+    'ppc64',
+    'ppc64le',
+]
 
 
 def fetch_go_releases() -> List[Dict]:
@@ -102,8 +109,7 @@ def write_checksums(version: str, release: Dict) -> None:
         os_name = file_info.get('os')
         kind = file_info.get('kind')
         arch = file_info.get('arch')
-        if os_name == 'linux' and kind == 'archive' and arch in [
-                'amd64', 'armv6l', 'arm64']:
+        if os_name == 'linux' and kind == 'archive' and arch in GO_SUPPORTED_ARCH:
             write_checksum(version, arch, file_info.get('sha256'))
 
 

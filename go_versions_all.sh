@@ -1,6 +1,7 @@
 #!/bin/bash
 
 curl -s 'https://go.dev/dl/?mode=json&include=all' | jq -r '
+["amd64", "arm64", "armv6l", "ppc64", "ppc64le"] as $supported_arches |
 [
   "Version", "Arch", "SHA256"
 ],
@@ -8,7 +9,7 @@ curl -s 'https://go.dev/dl/?mode=json&include=all' | jq -r '
   .[] |
   .version as $version |
   .files[] |
-  select(.os == "linux" and (.arch == "amd64" or .arch == "arm64" or .arch == "armv6l")) |
+  select(.os == "linux" and (.arch as $this_arch | $supported_arches | index($this_arch))) |
   [
     $version,
     .arch,
