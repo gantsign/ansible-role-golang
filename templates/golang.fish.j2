@@ -1,0 +1,19 @@
+{{ ansible_managed | comment('plain') }}
+
+set \
+    --global \
+    --export \
+    GOROOT \
+    '{{ golang_install_dir }}'
+
+fish_add_path "$GOROOT/bin"
+
+{% if golang_gopath not in (None, '') %}
+set \
+    --global \
+    --export \
+    GOPATH \
+    '{{ golang_gopath }}'
+
+fish_add_path "$GOPATH/bin"
+{% endif %}
