@@ -108,3 +108,9 @@
 - name: Re-read facts
   ansible.builtin.setup:
     filter: ansible_local
+
+- name: Setup for fish shell
+  become: true
+  ansible.builtin.import_tasks: fish.yml
+  tags:
+    - fish

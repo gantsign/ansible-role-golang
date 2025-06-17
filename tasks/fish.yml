@@ -1,0 +1,17 @@
+- name: Check that fish config directory exists
+  ansible.builtin.stat:
+    path: /etc/fish/conf.d
+  register: fish_config_dir
+
+- name: Continue if it does
+  ansible.builtin.assert:
+    that: fish_config_dir.stat.exists
+    success_msg: Setup for fish shell
+
+- name: Send fish script
+  ansible.builtin.template:
+    src: golang.fish.j2
+    dest: /etc/fish/conf.d/golang.fish
+    owner: root
+    group: root
+    mode: 'u=rw,go=r'
