@@ -1,3 +1,0 @@
-molecule==24.9.0
-molecule-plugins[docker]
-pytest-testinfra

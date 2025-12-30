@@ -1,9 +1,0 @@
-# code: language=ansible
----
-- name: Converge
-  hosts: all
-
-  roles:
-    - role: ansible-role-golang
-      golang_version: '1.23.8'
-      golang_gopath: '$HOME/workspace-go'

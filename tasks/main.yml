@@ -45,15 +45,6 @@
     mode: 'u=rwx,go=rx'
     dest: '{{ golang_install_dir }}'
 
-- name: Install unarchive dependencies (zypper)
-  become: true
-  ansible.builtin.package:
-    name:
-      - gzip
-      - tar
-    state: present
-  when: ansible_facts.pkg_mgr == 'zypper' and not ansible_check_mode
-
 - name: Install Go language SDK
   become: true
   ansible.builtin.unarchive:

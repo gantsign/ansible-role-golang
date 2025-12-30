@@ -1,4 +1,0 @@
--r ansible-max.in
--r lint.in
--r tox.in
-pip-tools==7.4.1

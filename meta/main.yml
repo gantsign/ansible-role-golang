@@ -7,23 +7,12 @@ galaxy_info:
   license: MIT
   min_ansible_version: '2.17'
   platforms:
-    - name: EL
-      versions:
-        - '9'
-    - name: Ubuntu
-      versions:
-        - jammy
-        - noble
     - name: Debian
       versions:
-        - bullseye
-        - bookworm
-    - name: Fedora
+        - trixie
+    - name: Ubuntu
       versions:
-        - '41'
-    - name: opensuse
-      versions:
-        - all
+        - noble
   galaxy_tags:
     - golang
     - development

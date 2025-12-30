@@ -3,29 +3,6 @@
 - name: Converge
   hosts: all
 
-  pre_tasks:
-    # Workaround for Fedora 41 https://github.com/ansible/ansible/issues/84206
-    - name: Install python3-libdnf5
-      become: true
-      ansible.builtin.command: dnf install -y python3-libdnf5
-      when: ansible_facts.pkg_mgr == 'dnf5'
-      changed_when: false
-
   roles:
     - role: ansible-role-golang
       golang_gopath: '$HOME/workspace-go'
-
-  post_tasks:
-    - name: Install which
-      ansible.builtin.package:
-        name: which
-        state: present
-      when: ansible_facts.pkg_mgr in ('yum', 'dnf', 'dnf5', 'zypper')
-
-    # provides /etc/profile
-    - name: Install aaa_base (zypper)
-      become: true
-      ansible.builtin.package:
-        name: aaa_base
-        state: present
-      when: ansible_facts.pkg_mgr == 'zypper'

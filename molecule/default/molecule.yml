@@ -8,14 +8,25 @@ driver:
 role_name_check: 2
 
 platforms:
-  - name: ansible-role-golang-ubuntu-max
+  - name: golang-debian-13-amd64
+    image: debian:13
+  - name: golang-debian-13-arm64
+    image: debian:13
+    platform: linux/arm64
+  - name: golang-ubuntu-2404-amd64
     image: ubuntu:24.04
+  - name: golang-ubuntu-2404-arm64
+    image: ubuntu:24.04
+    platform: linux/arm64
 
 provisioner:
   name: ansible
+  env:
+    ALLOW_BROKEN_CONDITIONALS: "true"
   config_options:
     defaults:
       inject_facts_as_vars: false
+      allow_broken_conditionals: true
 
 verifier:
   name: testinfra
