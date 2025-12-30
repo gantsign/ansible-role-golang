@@ -20,11 +20,6 @@ golang_version: '1.25.5'
 # Mirror to download the Go language SDK redistributable package from
 golang_mirror: 'https://go.dev/dl'
 
-# Use a pre-downloaded archive already present on the target host to bypass
-# remote downloads (default expects it under /tmp with the redistributable
-# filename, e.g. /tmp/go1.25.5.linux-arm64.tar.gz)
-golang_local_archive: '/tmp/{{ golang_redis_filename }}'
-
 # Base installation directory the Go language SDK distribution
 golang_install_dir: '/opt/go/{{ golang_version }}'
 
