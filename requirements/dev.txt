@@ -56,7 +56,7 @@ docker==7.1.0
     # via molecule-plugins
 enrich==1.2.7
     # via molecule
-filelock==3.17.0
+filelock==3.20.3
     # via
     #   ansible-lint
     #   tox
@@ -186,7 +186,7 @@ urllib3==2.3.0
     # via
     #   docker
     #   requests
-virtualenv==20.29.1
+virtualenv==20.36.1
     # via tox
 wcmatch==10.0
     # via
