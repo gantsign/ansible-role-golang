@@ -107,6 +107,7 @@ packaging==24.2
     #   pyproject-api
     #   pytest
     #   tox
+    #   wheel
 pathspec==0.12.1
     # via
     #   ansible-lint
@@ -192,7 +193,7 @@ wcmatch==10.0
     # via
     #   ansible-lint
     #   molecule
-wheel==0.45.1
+wheel==0.46.2
     # via pip-tools
 yamllint==1.35.1
     # via
