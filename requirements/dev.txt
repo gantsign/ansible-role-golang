@@ -30,7 +30,7 @@ cachetools==5.5.1
     # via tox
 certifi==2024.12.14
     # via requests
-cffi==1.17.1
+cffi==2.0.0
     # via cryptography
 chardet==5.2.0
     # via tox
@@ -46,7 +46,7 @@ click-help-colors==0.9.4
     # via molecule
 colorama==0.4.6
     # via tox
-cryptography==44.0.1
+cryptography==46.0.5
     # via ansible-core
 distlib==0.3.9
     # via virtualenv
