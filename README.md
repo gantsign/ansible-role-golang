@@ -51,31 +51,128 @@ The following variables will change the behavior of this role (default values
 are shown below):
 
 ```yaml
-# Go language SDK version number
-golang_version: '1.24.2'
+# Go language SDK version number ('latest' resolves the newest stable release
+# at run time, or pin an explicit version such as '1.26.6')
+golang_version: 'latest'
+
+# Resolve the version and SHA256 checksum from the Go download API instead of
+# the checked-in vars/versions/ table. Set to false for offline runs.
+golang_use_download_api: true
+
+# Go download API used to resolve versions and checksums
+golang_releases_url: 'https://go.dev/dl/?mode=json&include=all'
 
 # Mirror to download the Go language SDK redistributable package from
-golang_mirror: 'https://storage.googleapis.com/golang'
+golang_mirror: 'https://dl.google.com/go'
 
 # Base installation directory the Go language SDK distribution
-golang_install_dir: '/opt/go/{{ golang_version }}'
+golang_install_dir: '/opt/go/{{ golang_version_resolved }}'
 
 # Directory to store files downloaded for Go language SDK installation
 golang_download_dir: "{{ x_ansible_download_dir | default(ansible_facts.env.HOME + '/.ansible/tmp/downloads') }}"
 
 # Location for GOPATH environment variable
 golang_gopath:
+
+# SHA256 sum of the redistributable package. Resolved automatically; only set
+# this to override both the download API and the vars/versions/ table.
+golang_redis_sha256sum:
 ```
+
+`golang_version_resolved` is set by the role once `golang_version` has been
+resolved to a concrete version; use it instead of `golang_version` when
+referencing the installed version from your own templates.
+
+### Architecture and checksum detection
+
+The role detects the target's CPU architecture from `ansible_facts.architecture`
+and maps it to the matching Go redistributable (`vars/architecture/`), then
+resolves the SHA256 checksum **for that architecture**:
+
+| Ansible architecture | Go redistributable |
+|----------------------|--------------------|
+| `x86_64`             | `amd64`            |
+| `aarch64` / `arm64`  | `arm64`            |
+| `armv6l` / `armv7l`  | `armv6l`           |
+| `i386` / `i686`      | `386`              |
+| `ppc64le`, `ppc64`, `s390x`, `riscv64`, `mips`, `mips64`, `mips64le` | same name |
+| `loongarch64`        | `loong64`          |
+| `mipsel`             | `mipsle`           |
+
+Because both the version and the checksum are resolved at run time, **callers do
+not need to specify `golang_version` or `golang_redis_sha256sum` at all** — the
+same playbook installs the correct build on amd64, arm64 and everything else.
+Hardcoding `golang_redis_sha256sum` in a playbook is in fact harmful: a role
+parameter outranks the detected value, so an amd64 checksum passed that way
+makes the download fail its integrity check on an arm64 host.
+
+Resolution order for the checksum, highest priority first:
+
+1. `golang_redis_sha256sum` passed explicitly by the caller.
+2. The Go download API, for the resolved version and detected architecture.
+3. `vars/versions/<version>-<arch>.yml` — the checked-in offline table.
+
+If none apply, the role fails with a message naming the version and architecture
+it could not resolve, rather than downloading the wrong artifact.
+
+### Offline / air-gapped use
+
+Set `golang_use_download_api: false` and pin `golang_version` to a version that
+exists in `vars/versions/`. The static table is still maintained by
+`add_new_versions.py` and covers amd64, arm64 and armv6l.
 
 ### Supported Go language SDK Versions
 
-The following versions of Go language SDK are supported without any additional
-configuration (for other versions follow the Advanced Configuration
-instructions):
+Any version published by the Go download API works out of the box. The versions
+below additionally have checked-in checksums, so they also work with
+`golang_use_download_api: false` (for other versions follow the Advanced
+Configuration instructions):
 
+* `1.27.2`
+* `1.27.1`
+* `1.27.0`
+* `1.26.8`
+* `1.26.7`
+* `1.26.6`
+* `1.26.5`
+* `1.26.4`
+* `1.26.3`
+* `1.26.2`
+* `1.26.1`
+* `1.26.0`
+* `1.25.14`
+* `1.25.13`
+* `1.25.12`
+* `1.25.11`
+* `1.25.10`
+* `1.25.9`
+* `1.25.8`
+* `1.25.7`
+* `1.25.6`
+* `1.25.5`
+* `1.25.4`
+* `1.25.3`
+* `1.25.2`
+* `1.25.1`
+* `1.25.0`
+* `1.24.13`
+* `1.24.12`
+* `1.24.11`
+* `1.24.10`
+* `1.24.9`
+* `1.24.8`
+* `1.24.7`
+* `1.24.6`
+* `1.24.5`
+* `1.24.4`
+* `1.24.3`
 * `1.24.2`
 * `1.24.1`
 * `1.24.0`
+* `1.23.12`
+* `1.23.11`
+* `1.23.10`
+* `1.23.9`
 * `1.23.8`
 * `1.23.7`
 * `1.23.6`
@@ -290,14 +387,21 @@ instructions):
 Advanced Configuration
 ----------------------
 
-The following role variable is dependent on the Go language SDK version; to use
-a Go language SDK version **not pre-configured by this role** you must configure
-the variable below:
+You normally do not need anything here: the download API supplies the checksum
+for any published version on the detected architecture.
+
+Only when the API is unreachable **and** the version is missing from
+`vars/versions/` do you need to supply the checksum yourself — and it must be
+the checksum for the architecture you are targeting, i.e. for
+`go{{ golang_version_resolved }}.linux-{{ golang_architecture }}.tar.gz`:
 
 ```yaml
-# SHA256 sum for the redistributable package (i.e. "go{{ golang_version }}.linux-amd64.tar.gz")
+# SHA256 sum for the redistributable package on THIS target's architecture
 golang_redis_sha256sum: '6e3e9c949ab4695a204f74038717aa7b2689b1be94875899ac1b3fe42800ff82'
 ```
+
+Do not set this in a playbook that runs against hosts of mixed architectures —
+one hardcoded sum cannot be right for all of them.
 
 Example Playbook
 ----------------

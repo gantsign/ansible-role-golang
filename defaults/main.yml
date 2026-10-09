@@ -1,16 +1,34 @@
 # code: language=ansible
 ---
-# Go language SDK version number
-golang_version: '1.24.2'
+# Go language SDK version number.
+# Use 'latest' to resolve the newest stable release from the Go download API at
+# run time, or pin an explicit version such as '1.26.6'.
+golang_version: 'latest'
+
+# Resolve the version and the SHA256 checksum from the Go download API
+# (see golang_releases_url) instead of the checked-in vars/versions/ table.
+# The API is queried for the architecture detected on the target host, so
+# neither golang_version nor golang_redis_sha256sum need to be specified.
+# Set to false for offline/air-gapped runs; that requires golang_version to be
+# pinned to a version present in vars/versions/.
+golang_use_download_api: true
+
+# Go download API used to resolve versions and checksums
+golang_releases_url: 'https://go.dev/dl/?mode=json&include=all'
 
 # Mirror to download the Go language SDK redistributable package from
-golang_mirror: 'https://storage.googleapis.com/golang'
+golang_mirror: 'https://dl.google.com/go'
 
 # Base installation directory the Go language SDK distribution
-golang_install_dir: '/opt/go/{{ golang_version }}'
+golang_install_dir: '/opt/go/{{ golang_version_resolved }}'
 
 # Directory to store files downloaded for Go language SDK installation
 golang_download_dir: "{{ x_ansible_download_dir | default(ansible_facts.env.HOME + '/.ansible/tmp/downloads') }}"
 
 # Location for GOPATH environment variable
 golang_gopath:
+
+# SHA256 sum of the redistributable package.
+# Left empty on purpose: it is resolved automatically from the download API, or
+# from vars/versions/<version>-<arch>.yml. Only set this to override both.
+golang_redis_sha256sum:

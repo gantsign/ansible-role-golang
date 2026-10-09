@@ -7,17 +7,82 @@
     - ../vars/architecture/default.yml
   ansible.builtin.include_vars: '{{ item }}'
 
+# Resolving the version and checksum from the download API keeps the role
+# universal: the caller does not have to know which architecture the target
+# host is, nor track checksums for it. The checked-in vars/versions/ table
+# stays as the offline fallback.
+- name: Query the Go download API
+  ansible.builtin.uri:
+    url: '{{ golang_releases_url }}'
+    return_content: true
+  register: golang_releases
+  until: golang_releases.status | default(0) == 200
+  retries: 3
+  delay: 5
+  check_mode: false
+  when: golang_use_download_api | bool
+  # An unreachable API is not fatal: the run falls back to vars/versions/ below.
+  ignore_errors: true
+
+- name: Resolve version and checksum from the Go download API
+  vars:
+    _wanted_version: >-
+      {{ (golang_releases.json | selectattr('stable') | map(attribute='version') | first | default(''))
+         if golang_version == 'latest'
+         else 'go' ~ golang_version }}
+    _release: >-
+      {{ golang_releases.json
+         | selectattr('version', 'equalto', _wanted_version)
+         | first | default({}) }}
+    _archive: >-
+      {{ _release.files | default([])
+         | selectattr('os', 'equalto', 'linux')
+         | selectattr('kind', 'equalto', 'archive')
+         | selectattr('arch', 'equalto', golang_architecture)
+         | first | default({}) }}
+  ansible.builtin.set_fact:
+    golang_version_resolved: "{{ _wanted_version | regex_replace('^go', '') }}"
+    golang_redis_sha256sum: '{{ _archive.sha256 }}'
+  when:
+    - golang_use_download_api | bool
+    - golang_releases.json is defined
+    - _archive.sha256 is defined
+
+- name: Fall back to the pinned version when the download API was not used
+  ansible.builtin.set_fact:
+    golang_version_resolved: '{{ golang_version }}'
+  when: golang_version_resolved is not defined
+
+- name: Assert a concrete version was resolved
+  ansible.builtin.assert:
+    that:
+      - golang_version_resolved not in (None, '', 'latest')
+    fail_msg: >-
+      Could not resolve golang_version 'latest' for architecture
+      '{{ golang_architecture }}' from {{ golang_releases_url }}.
+      Pin golang_version to an explicit version (for example '1.26.6') or
+      restore network access to the Go download API.
+
 - name: Load version vars
   with_first_found:
-    - '../vars/versions/{{ golang_version }}-{{ golang_architecture }}.yml'
-    - '../vars/versions/{{ golang_version }}.yml'
+    - '../vars/versions/{{ golang_version_resolved }}-{{ golang_architecture }}.yml'
+    - '../vars/versions/{{ golang_version_resolved }}.yml'
     - ../vars/versions/default.yml
   ansible.builtin.include_vars: '{{ item }}'
+  # include_vars and set_fact write to the same non-persistent fact namespace,
+  # so only consult the static table when nothing resolved the checksum already.
+  when: golang_redis_sha256sum | default('', true) | length == 0
 
 - name: Assert version vars
   ansible.builtin.assert:
     that:
       - "golang_redis_sha256sum not in (None, '')"
+    fail_msg: >-
+      No SHA256 checksum available for Go {{ golang_version_resolved }} on
+      architecture '{{ golang_architecture }}'. Either the download API is
+      unreachable and vars/versions/{{ golang_version_resolved }}-{{ golang_architecture }}.yml
+      does not exist, or golang_version points at a release that does not ship
+      a linux/{{ golang_architecture }} archive.
 
 - name: Create download directory
   ansible.builtin.file:
