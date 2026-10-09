@@ -128,6 +128,7 @@ below additionally have checked-in checksums, so they also work with
 `golang_use_download_api: false` (for other versions follow the Advanced
 Configuration instructions):
 
+* `1.27.2`
 * `1.27.1`
 * `1.27.0`
 * `1.26.8`
